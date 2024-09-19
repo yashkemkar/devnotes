@@ -10,15 +10,40 @@
 
 They progressively get smaller.
 
-### How to change text to be italicised, bold, etc.
-To italicise something you must use a * on each side of the string/word. 
+### How to change text to be italicised, bold, strikethrough, highlighted etc.
+To *italicise* something you must use a * on each side of the string/word. 
 ```
 *italicise*
 ```
 
-To make something bold you must use two ** on each side of the string/word.
+To make something **bold** you must use two ** on each side of the string/word.
 ```
 **bold**
+```
+
+To make something ~~strikethrough~~ you must use two ~~ on each side of the string/word.
+```
+~~strikethrough~~
+```
+
+To make something ==highlighted== you must use two == on each side of the string/word.
+```
+==highlighted==
+```
+
+### How to use subscript/superscript:
+To make something subscript you must use one ~ before the text that is subscript and after (this may not work in all applications as some use one ~ for strikethrough) 
+H~2~O
+
+```
+H~2~O
+```
+
+To make something superscript you must use a ^ before the text that is superscript and after
+X^2^
+
+```
+X^2^
 ```
 
 ### How to make checklists
@@ -26,12 +51,11 @@ Checklists are pretty simple, all you have to do is use dashes for each line as 
 - Item 1
 - Item 2
 - Item 3
-...
 
-And to put a check box you just use the [] square brackets (either empty or with an x in them)
+And to put a check box you just use the ([]) square brackets inside the round brackets (either with an empty space or with an x in them)
 ```
-- [x] Yes
-- [ ] No
+-([x]) Yes
+-([ ]) No
 ```
 ### How to do a bullet-point list:
 Simply just use one star at the start of each line and enter to do another.
