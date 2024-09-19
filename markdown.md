@@ -1,9 +1,9 @@
 # Markdown
 
-## HOW IT WORKs
+## HOW IT WORKS
 
 
-### - How to set different header sizes:
+### How to set different header sizes:
 "#" Assigns as header1 (you have to leave a space)
 "##" Assigns as header2 (you have to leave a space)
 "###" Assigns as header3 (you have to leave a space)
@@ -21,31 +21,6 @@ To make something **bold** you must use two ** on each side of the string/word.
 **bold**
 ```
 
-To make something ~~strikethrough~~ you must use two ~~ on each side of the string/word.
-```
-~~strikethrough~~
-```
-
-To make something ==highlighted== you must use two == on each side of the string/word.
-```
-==highlighted==
-```
-
-### How to use subscript/superscript:
-To make something subscript you must use one ~ before the text that is subscript and after (this may not work in all applications as some use one ~ for strikethrough) 
-H~2~O
-
-```
-H~2~O
-```
-
-To make something superscript you must use a ^ before the text that is superscript and after
-X^2^
-
-```
-X^2^
-```
-
 ### How to make checklists
 Checklists are pretty simple, all you have to do is use dashes for each line as so:
 - Item 1
@@ -57,6 +32,9 @@ And to put a check box you just use the ([]) square brackets inside the round br
 -([x]) Yes
 -([ ]) No
 ```
+-([x]) Yes
+-([ ]) No
+
 ### How to do a bullet-point list:
 Simply just use one star at the start of each line and enter to do another.
 Example: I like...
