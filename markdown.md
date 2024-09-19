@@ -32,8 +32,8 @@ And to put a check box you just use the ([]) square brackets inside the round br
 -([x]) Yes
 -([ ]) No
 ```
--([x]) Yes
--([ ]) No
+- ([x]) Yes
+- ([ ]) No
 
 ### How to do a bullet-point list:
 Simply just use one star at the start of each line and enter to do another.
