@@ -29,11 +29,11 @@ Checklists are pretty simple, all you have to do is use dashes for each line as 
 
 And to put a check box you just use the ([]) square brackets inside the round brackets (either with an empty space or with an x in them)
 ```
--([x]) Yes
--([ ]) No
+- [x] Yes
+- [ ] No
 ```
-- ([x]) Yes
-- ([ ]) No
+- [x] Yes
+- [ ] No
 
 ### How to do a bullet-point list:
 Simply just use one star at the start of each line and enter to do another.
