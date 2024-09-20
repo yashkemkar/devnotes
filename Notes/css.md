@@ -71,4 +71,4 @@ This effect creates an animation that brings a shadow above the button or box, b
         }
 ```
 
-<video controls src="Light Shadow Effect.mp4" title="Light Shadow Effect"></video>
+![Light Shadow Effect](<Light Shadow Effect.gif>)
