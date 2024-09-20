@@ -27,14 +27,16 @@ This effect creates a bit of a grid background that can provide a cool effect fo
 
 ![Grid Background Effect](<Grid Background Effect.png>)
 
-### Blue Shadow Effect
+### Blue Shadow Effect (Static)
+This effect creates a sort of shadow behind an element such as a box or a button that can provide a sort of 3-D popping out of the screen effect which is pretty cool. Obviously the colour of the shadow can be changed if need be, however the effect itself is quite nice. Especially for buttons.
+```
+.blueShadow {
+    box-shadow: 0px 14px 55px rgba(106, 96, 255, 0.35);
+}
+```
+![Blue Shadow Effect](<Blue Shadow Effect.png>)
 
-
-
-        .blueShadow {
-            box-shadow: 0px 14px 55px rgba(106, 96, 255, 0.35);
-        }
-
+### Light Shadow Effect (Hover)
         .lightShadow {
             position: relative;
             overflow: hidden;
