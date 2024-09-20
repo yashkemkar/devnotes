@@ -34,8 +34,7 @@ This effect creates a sort of shadow behind an element such as a box or a button
     box-shadow: 0px 14px 55px rgba(106, 96, 255, 0.35);
 }
 ```
-![Blue Shadow Effect](<Blue Shadow Effect.png>)
-
+![Blue Shadow Effect](<"C:\Users\yashk\OneDrive\Documents\Github\devnotes\Notes\public\images\Blue Shadow Effect.png">)
 ### Light Shadow Effect (Hover)
         .lightShadow {
             position: relative;
