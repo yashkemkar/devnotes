@@ -25,7 +25,7 @@ This effect creates a bit of a grid background that can provide a cool effect fo
  } 
  ```
 
-![Grid Background Effect]("C:\Users\yashk\OneDrive\Documents\Github\devnotes\Notes\public\images\Grid Background Effect.png")
+![Grid Background Effect](<Grid Background Effect.png>)
 
 ### Blue Shadow Effect
 
