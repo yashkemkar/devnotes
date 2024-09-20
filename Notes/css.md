@@ -1,4 +1,4 @@
-# CSS
+# CSS Notes
 
 Steps to becoming a CSS God:
 1. Time & Practice - just continuous practice over an extended period of time.
@@ -10,7 +10,7 @@ Steps to becoming a CSS God:
 
 ## HOW IT WORKS
 
-CSS stands for cascaded style sheets
+CSS stands for cascaded style sheets. The code in CSS assigns styling to particular classes or elements within an HTML doc. You can change almost anything visually through CSS.
 
 
 ## Pre-programmed effects
