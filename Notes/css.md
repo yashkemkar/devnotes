@@ -11,3 +11,54 @@ Steps to becoming a CSS God:
 ## HOW IT WORKS
 
 CSS stands for cascaded style sheets
+
+
+## Pre-programmed effects
+Here is a big compilation of precoded effects that you have seen elsewhere and thought might be useful for the future. You just have to put them in your code and assign a class to the relevant item. There will be a title, description, image and CSS code for each one.
+
+### Background Grid Effect
+This effect creates a bit of a grid background that can provide a cool effect for a landing page. You can change the colours around if you feel like creating something unique, but this thickness is very faint which makes it non-obtrusive.
+```
+.bgGrid {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, #eef2ff 1px, transparent 1px), linear-gradient(to bottom, #eef2ff 1px, transparent 1px);
+ } 
+ ```
+
+![image]("C:\Users\yashk\OneDrive\Documents\Github\devnotes\Notes\public\images\Grid Background Effect.png")
+
+### Blue Shadow Effect
+
+
+
+        .blueShadow {
+            box-shadow: 0px 14px 55px rgba(106, 96, 255, 0.35);
+        }
+
+        .lightShadow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lightShadow p {
+            position: relative;
+            z-index: 2;
+        }
+
+        .lightShadow::after {
+            position: absolute;
+            content: '';
+            background: navy;
+            opacity: 0.04;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 100%;
+            transition-duration: 200ms;
+            z-index: 0;
+        }
+
+        .lightShadow:hover::after {
+            transform: translateX(100%);
+        }
+    </style>
