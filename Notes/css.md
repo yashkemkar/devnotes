@@ -18,6 +18,7 @@ Here is a big compilation of precoded effects that you have seen elsewhere and t
 
 ### Background Grid Effect
 This effect creates a bit of a grid background that can provide a cool effect for a landing page. You can change the colours around if you feel like creating something unique, but this thickness is very faint which makes it non-obtrusive.
+
 ```
 .bgGrid {
     background-size: 40px 40px;
@@ -29,13 +30,19 @@ This effect creates a bit of a grid background that can provide a cool effect fo
 
 ### Blue Shadow Effect (Static)
 This effect creates a sort of shadow behind an element such as a box or a button that can provide a sort of 3-D popping out of the screen effect which is pretty cool. Obviously the colour of the shadow can be changed if need be, however the effect itself is quite nice. Especially for buttons.
+
 ```
 .blueShadow {
     box-shadow: 0px 14px 55px rgba(106, 96, 255, 0.35);
 }
 ```
-![Blue Shadow Effect](<"C:\Users\yashk\OneDrive\Documents\Github\devnotes\Notes\public\images\Blue Shadow Effect.png">)
+
+![Blue Shadow Effect](<Blue Shadow Effect.png>)
+
 ### Light Shadow Effect (Hover)
+This effect creates an animation that brings a shadow above the button or box, but it doesnt do this instantaneously. This does a transition through the x axis from left to right like the shadow travelling across it. You could do the same for y-axis as well. Again very nice for buttons.
+
+```
         .lightShadow {
             position: relative;
             overflow: hidden;
@@ -62,4 +69,6 @@ This effect creates a sort of shadow behind an element such as a box or a button
         .lightShadow:hover::after {
             transform: translateX(100%);
         }
-    </style>
+```
+
+<video controls src="Light Shadow Effect.mp4" title="Light Shadow Effect"></video>
