@@ -1,4 +1,4 @@
-# TailwindCSS
+# TailwindCSS Notes
 
 TailwindCSS is essentially a CSS framework/library that enables the user to design beautiful websites with so many wonderful effects with speed, you no longer need to manually enter every single element of CSS by yourself. You will use TailwindCSS with almost every single website design you ever do.
 
