@@ -945,7 +945,7 @@ If we run this through the console we get -
 **Non-existent keys, values, entries**
 If we try to look up a key, value or entry that doesn't exist, the console would just return undefined. To double check, we could use the 'key' in bio function to get a true/false telling us whether it exists or not.
 
-## Scope
+## Scope, closures & modular code
 ### Global Scope vs. Local Scope
 Any variable independently defined on a higher level is known to be part of the global scope, meaning that it can always be referred to at any point in the document as it is a defined variable. Whereas any variable defined within the scope of a smaller element, such as a for loop, cannot be referred to at any point in the body of code outside of the for loop.
 
@@ -953,7 +953,7 @@ Basically, if you define a variable outside of a function then it will have glob
 
 Something to be aware of is to not repeat variable names, even if local scope allows you to double up on variable names, it will just cause problems for your code.
 
-## Closure
+### Closure
 When we have a function inside a function as shown below:
 
 ```
@@ -976,3 +976,79 @@ The console will display this:
 2
 
 Whats happening here is that we have a function starting with a count of 0. Inside that is what is known as an anonymous function (as it is not defined). At the end of the code we let increment invoke the counter function, whatever is left behind is effectively going to take the place off the counter function. This means that when you run increment() twice and invoke the counter function, it will remember the count outside of its local scope. A closure is formed when a function retains access to the variable count from outside its scope, even after the function has finished executing. This is known as data encapsulation.
+
+### Modular code
+We can reference all sorts of data between JavaScript files, for example functions. If we have a file with a function in it that we want to access and open a line of communication with, essentially we need to make that function modular and export the function or whatever data it is from one file so we can access it in another. For example, in we go back to the complete javascript course chapter_2.js and chapter_3.js - there was a function in chapter 2 known as the addStrings function. To access the function from chapter 2 in our chapter_3.js, we need to export the function.
+```
+function addStrings(string1 = 'default1', string2 = 'default2') {
+
+let concatString = string1 + ' ' + string2
+console.log(concatString)
+ return concatString
+}
+let newString = addStrings('hello')
+console.log('the new string is: ', newString)
+
+module.exports = {
+    addStrings,
+    example_array
+}
+```
+Now in the chapter 3 file if we start typing the function or array names, they show up on the intellisense. If we hit enter with the intellisense suggestion, it will automatically import addStrings as a constant into our chapter 3 file. See the code result below:
+```
+const { addStrings, example_array } = require("./chapter_2")
+```
+This line of code automatically appears at the top of our chapter_3.js file. This line of code above is known as destructuring syntax. However, it means that now addStrings and example_array is available in chapter_3.js now.
+
+The benefit of this ability is that we can break down our JavaScript code into more bite-sized files that have more specific purposes. For example, you might have one file that is a data file, one that is a server file, or some other niche functionality. And each of these is just communicated with through the module.exports function.
+
+### Error handling
+#### Broken code
+There may be times when your code does not work, it results in an error and can cause your code to break. In situations like this, where there may be something going wrong such as referencing something undefined or utilising it in a function. Broken code can cause the whole code to stop executing unless we use blocks to keep the rest of the code functioning even if one part is broken. For example, this is what broken code might look like:
+```
+const broken_object = {
+    word:'nice'
+}
+
+function problematicCodeBlock() {
+      const sub_object = broken_object.hello.world
+    console.log(sub_object)
+}
+
+problematicCodeBlock()
+console.log('code continued to execute')
+```
+With this current code, the console returns an error message and it has nothing after it. We can see there is a command to print 'code continued to execute' after the function, however the entire code just stopped and broke. To fix this, we must use a try-catch block.
+
+#### Try-catch block
+We can use something called the "try-catch" block. This is where we use a try method and then a catch method as shown below:
+```
+const broken_object = {
+    word:'nice'
+}
+
+function problematicCodeBlock() {
+    try {
+        const sub_object = broken_object.hello.world
+        console.log(sub_object)
+    } catch(err){
+        console.log(err)
+    }
+}
+problematicCodeBlock()
+console.log('code continued to execute')
+```
+The code above shows that there is an object with the key word with a value of 'nice'. However, we can put inside our function a try-catch block so that it doesnt just break the code. Within the try section we would put our function and within the catch section we need to put correct code, which is most often just console log the error message. Whatever we put inside the catch() brackets will be what the error is labeled, but it will always be an error. If we run that code above, the console will return:
+
+** TypeError: Cannot read properties of undefined (reading 'world')
+    at problematicCodeBlock (C:\Users\yashk\OneDrive\Documents\Github\the-complete-javascript-course\notes\chapter_3.js:96:48)
+    at Object.<anonymous> (C:\Users\yashk\OneDrive\Documents\Github\the-complete-javascript-course\notes\chapter_3.js:103:1)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:174:12)
+    at node:internal/main/run_main_module:28:49
+code continued to execute**
+
+As you can see above, it still prints "code continued to execute" at the end, indicating that the rest of the code was executed, despite the error.
