@@ -533,7 +533,6 @@ Regex is a way of checking if a string or password or any regular expression con
 Arrays or lists are very important data structures and they hold a variety of different data, keeping in mind that each value has to be a valid data type. Just like the string, arrays also have a bunch of methods that can be used to manipulate data in them. The primary things we have to do with objects and arrays is follow the CRUD operations. CRUD stands for create, read, update and delete. 
 
 This way any information stored in an array can be constantly updated in a database through user interactions. There is a certain order in which we can learn these operations.
-#### Dimensionality of arrays
 
 #### Read
 This is probably the most simple. Similar to how we used the array function above, we can input any index value in the argument to read the corresponding word in that position within the array. See the function below for an example:
@@ -573,6 +572,10 @@ let check = simple_array.sort()
 console.log(check)
 ```
 Entering this into the console returns the array [ 'cool', 'is', 'yash' ]. It just so happens to be the same as the reverse one for these particular strings, but it has sorted it alphabetically.
+
+Note, even if you console.log(simple_array), the console will still return a sorted one, despite only check being assigned to a sort operation. This is because the sort method actually gets applied to the simple_array itself, so once the code has been run the original array is now sorted (not just printed in a sorted order). It has actually been rearranged.
+
+This is something to learn and get used to over time, but some methods will give you a new array that you can assign to another variable, while some will manipulates the original array *in place* and returns a reference to the same array. The intellisense can tell you which one a method does.
 
 #### Update
 With our initial understanding of JavaScript we can update the information within an array just by assigning a new value to said position for example: 
@@ -618,17 +621,358 @@ console.log(simple_array)
 ```
 This would return an updated array into the console - [ 'new word', 'yash', 'is', 'cool' ].
 
+#### Delete
+We may also need to delete values inside an array and there are a few ways to do that. The first way we will look at is splicing an array into two arrays that start/end next to the value we want to remove, and then joining them back together using the .concat method. See the code below:
 
+```
+let simple_array = [1,2,3,4,5]
 
+let start_array = simple_array.slice(0,2)
+let end_array = simple_array.slice(3)
 
+let new_filtered_array = start_array.concat(end_array)
+console.log(new_filtered_array)
+```
+This would return an updated array with the value at the 2nd index position (3) deleted from the array. The console would return - [ 1, 2, 4, 5 ]. 
 
+However, we can make the function more flexible to remove a 3 wherever it shows up if we wanted to. The new code below shows a flexible way of programming this:
+```
+let simple_array = [1,2,3,4,5]
 
+let index_of_three = simple_array.indexOf(3)
+let start_array = simple_array.slice(0,index_of_three)
+let end_array = simple_array.slice(index_of_three+1)
 
+let new_filtered_array = start_array.concat(end_array)
+console.log(new_filtered_array)
+``` 
+The console would return an array same as the one above - [ 1, 2, 4, 5 ]
 
+If we rearranged the order of the values in the simple array to be as shown below, the new code will still work all the same. See below:
+```
+let simple_array = [1,4,3,2,5]
 
+let index_of_three = simple_array.indexOf(3)
+let start_array = simple_array.slice(0,index_of_three)
+let end_array = simple_array.slice(index_of_three+1)
 
+let new_filtered_array = start_array.concat(end_array)
+console.log(new_filtered_array)
+```
+The console would return this - [1, 4, 2, 5].
 
+### Dimensionality of arrays
+#### Multidimensional arrays
+So far we have learned about 1 dimensional arrays, however arrays can be multi-dimensional, we could even go to the 4th dimension with our arrays. Arrays can contain any valid data type, this means they can hold arrays within arrays, which could also be within another array. This is what it would look like:
+```
+let simple_array = [[[],[],[]], [[],[],[]], [[],[],[]],]
+console.log(simple_array)
+```
+This would be printed in the console - [ [ [], [], [] ], [ [], [], [] ], [ [], [], [] ] ].
 
+To call a value in this array you need to target the specific value within an array within another array etc. For example if we had an array within an array, we need to use two sets of [] to target a specific value. See the code below:
 
+```
+let simple_array = [[[3],[],[]], [[],[],[]], [[],[],[]],]
+console.log(simple_array[0][0][0])
+```
+This would be printed in the console - 3
 
+#### Loops in multidimensional arrays
+We can run loops in multidimensional arrays, however our code will look a little different. What we can do is get our code to present the index locations of a value within our array as well as the value. See below for an example:
+```
+let simple_array = [[1, 2], [3, 4]]
 
+for (let i = 0; i < simple_array.length; i++) {
+    let subArray = simple_array[i]
+    for (let j = 0; j < subArray.length; j++) {
+        console.log(i, j,simple_array[i][j])
+    }
+}
+```
+This means that we are calling not only the value using simple_array[i][j] as discussed above, but we are also calling i and j themselves. This should give us the positions of each of these values as well as the values themselves. It would be printed in the console like this - 
+0 0 1
+0 1 2
+1 0 3
+1 1 4
+
+The first column shows the position in the main array, and the second shows the position in the sub array, and the third is the actual value.
+
+### Dictionaires/Objects
+
+An object or a dictionary contains key value pairs and uses curly brackets for the argument. The word dictionary is actually quite an apt description because the way a dictionary works is that you look up a word and there is an attached meaning (or in this case a value) to it. Similarly a dictionary or object in programming contains a key (to describe the nature of the proceeding value) and a value (the actual value of that specific key type) attached to it.
+
+#### Create
+Creating an object/dictionary is not much different to creating anything else in JavaScript. I could create a dictionary about myself, or in otherwords a bio:
+
+```
+const bio = {
+    name: 'yash',
+    age: 27,
+    hobbies:`['gym', 'coding', 'reading']`
+}
+let name = bio['name']
+console.log(name)
+```
+This would output 'yash' in the console. As you can see above, we need to access the key name as a string 'name'. However, we can make the code more dynamic by having another variable assigned to the key 'name', and then put the new variable as our argument. For example:
+
+```
+const bio = {
+    name: 'yash',
+    age: 27,
+    hobbies:`['gym', 'coding', 'reading']`
+}
+let name_key = 'name'
+let name = bio[name_key]
+console.log(name)
+```
+
+This would also output 'yash' into the console, however now it is more dynamic. 
+
+#### Read
+To search up if a key is within a bio we use a special syntax to see if the dictionary actually contains a key which follows the format 'key' in object_name within the console. The key must be in a string format because otherwise it would be treated as a variable. See the code below for an example:
+```
+console.log('age' in bio)
+```
+This would return 'true' in the console because age is present as a key in the bio. If the key wasn't there it would return 'false'.
+
+We can also return a value within an object - all we would do is reference the index position of the value within the array and use the square bracket notation for referencing within arrays. If add this code after the main section above it would return the value we want:
+```
+console.log(bio.hobbies[2])
+```
+This would return 'reading' in the console. If the key-value pair wasnt an array, you wouldn't have any brackets, just bio.hobbies.
+
+#### Update
+Normally the const function wouldn't allow us to change a value assigned as constant, however with dictionaries, we can change values within the dictionary as long as we don't change the fact that it is a dictionary. But we can change the inside metadata. For example:
+
+```
+const bio = {
+    name: 'yash',
+    age: 27,
+    hobbies:`['gym', 'coding', 'reading']`
+}
+
+let name_key = 'name'
+bio[name_key] = 'henry'
+console.log(bio)
+```
+This would update the object and return the following in the console - { name: 'henry', age: 27, hobbies: "['gym', 'coding', 'reading']" }. If this key exists, it will update the key within the object, however if the key doesn't exist, it will create a new key and assign it that value. Either way, the object will be updated. See the code below:
+
+```
+const bio = {
+    name: 'yash',
+    age: 27,
+    hobbies:['gym', 'coding', 'reading']
+}
+
+let name_key = 'name'
+bio[name_key] = 'henry'
+
+bio['number_of_friends'] = 0
+
+console.log(bio)
+```
+
+This would return the following into the console:
+  name: 'henry',
+  age: 27,
+  hobbies: ['gym', 'coding', 'reading'],
+  number_of_friends: 0
+
+We can make the code dynamic, but what if we knew what the key was and for certain it is in the bio. In this case we can use the dot operator to update elements in the bio quickly. See the code below:
+```
+bio.age = 28
+console.log(bio)
+```
+If we run the console it will now print 28 instead of 27 (along with th rest of the original bio above). It would look like this - 
+{
+  name: 'henry',
+  age: 28,
+  hobbies: ['gym', 'coding', 'reading'],
+  number_of_friends: 0
+}
+ This is a quick, shorthand way of manipulation the object when we know the key exists.
+
+ #### Delete
+ To remove a key value pair you just use the delete function and reference the key like we have done above - either the square brackets or the dot operator. See the code below:
+ ```
+const bio = {
+    name: 'yash',
+    age: 27,
+    hobbies:['gym', 'coding', 'reading']
+}
+
+delete bio.age
+console.log(bio)
+```
+
+The console would return the same object without the key age - { name: 'yash', hobbies: [ 'gym', 'coding', 'reading' ] }
+
+#### Nested dictionaries
+Dictionaries are similar to arrays, where we can have a dictionary within a dictionary. This is a more complicated data structure that contains a key known as friends that has another dictionary within it, which itself holds a key value pair. See the code below for an example:
+
+ ```
+const bio = {
+    name: 'yash',
+    age: 27,
+    hobbies:['gym', 'coding', 'reading'],
+    friends: {
+        'juan': {
+            description: 'good at maths'
+        }
+    }
+}
+console.log(bio)
+```
+
+The console would return - 
+{
+  name: 'yash',
+  age: 27,
+  hobbies: [ 'gym', 'coding', 'reading' ],
+  friends: { juan: { description: 'good at maths' } }
+}
+
+If we wanted to access the description key value within the bio dictionary, we can do it in the same way we would access information in nested arrays - with subsequent [] operators. See the example below:
+```
+const bio = {
+    name: 'yash',
+    age: 27,
+    hobbies:['gym', 'coding', 'reading'],
+    friends: {
+        'juan': {
+            description: 'good at maths'
+        }
+    }
+}
+
+console.log(bio['friends']['juan']['description'])
+```
+
+This would return into the console - good at maths.
+
+We can actually do exactly the same thing with the .operator also. For example, we can use the dot operator to change a value within nested dictionaries. If we use the same code as above, but change the bio line to . operators and change the value to 'bad at maths', it would look like this:
+```
+const bio = {
+    name: 'yash',
+    age: 27,
+    hobbies:['gym', 'coding', 'reading'],
+    friends: {
+        'juan': {
+            description: 'good at maths'
+        }
+    }
+}
+
+bio.friends.juan.description = 'bad at maths'
+console.log(bio.friends.juan.description)
+```
+This would return 'bad at maths' into the console.
+
+#### Loops within dictionaries
+Now sometimes you may need to loop through keys within a dictionary to find something. However, loops require an indexing system, where arrays have a nice index system, you can't index the variables in a dictionary. So we have to approach it in a different way - we use a special method called Object.keys - that is going to return an array with all of the keys that are in the dictionary. **Note:** the O in Object.keys must be an uppercase O, it does not work with lowercase o. 
+
+**Return keys**
+See the example below:
+```
+const bio = {
+    name: 'yash',
+    age: 27,
+    hobbies:['gym', 'coding', 'reading'],
+    friends: {
+        'juan': {
+            description: 'good at maths'
+        }
+    }
+}
+const keys_in_object = Object.keys(bio)
+
+console.log(keys_in_object)
+```
+This returns into the console - [ 'name', 'age', 'hobbies', 'friends' ].
+
+**Return values**
+We can do the same with values in the bio by substituting the .keys to .values. See the example below:
+```
+const bio = {
+    name: 'yash',
+    age: 27,
+    hobbies:['gym', 'coding', 'reading'],
+    friends: {
+        'juan': {
+            description: 'good at maths'
+        }
+    }
+}
+const values_in_object = Object.values(bio)
+
+console.log(values_in_object)
+```
+If we run this through the console, we get - 
+[
+  'yash',
+  27,
+  [ 'gym', 'coding', 'reading' ],
+  { juan: { description: 'good at maths' } }
+]
+
+**Return entries**
+If we want to see both the key and the associated value, we can use a .entries function which will show us both. We can return entries in the console by substituting the .values to .entries. This will return an array of arrays with each key-value pair being inside an array of its own.. See the example below:
+```
+const bio = {
+    name: 'yash',
+    age: 27,
+    hobbies:['gym', 'coding', 'reading'],
+    friends: {
+        'juan': {
+            description: 'good at maths'
+        }
+    }
+}
+const entries_in_object = Object.entries(bio)
+
+console.log(entries_in_object)
+```
+
+If we run this through the console we get - 
+[
+  [ 'name', 'yash' ],
+  [ 'age', 27 ],
+  [ 'hobbies', [ 'gym', 'coding', 'reading' ] ],
+  [ 'friends', { juan: [Object] } ]
+]
+
+**Non-existent keys, values, entries**
+If we try to look up a key, value or entry that doesn't exist, the console would just return undefined. To double check, we could use the 'key' in bio function to get a true/false telling us whether it exists or not.
+
+## Scope
+### Global Scope vs. Local Scope
+Any variable independently defined on a higher level is known to be part of the global scope, meaning that it can always be referred to at any point in the document as it is a defined variable. Whereas any variable defined within the scope of a smaller element, such as a for loop, cannot be referred to at any point in the body of code outside of the for loop.
+
+Basically, if you define a variable outside of a function then it will have global scope, whereas if it is defined within a function by var, let or const, it will have local scope. It cannot be referred to outside of the function.
+
+Something to be aware of is to not repeat variable names, even if local scope allows you to double up on variable names, it will just cause problems for your code.
+
+## Closure
+When we have a function inside a function as shown below:
+
+```
+function counter(){
+    let count = 0
+
+    return function() {
+        count++
+        console.log(count)
+    }
+}
+
+let increment = counter()
+
+increment()
+increment()
+```
+The console will display this: 
+1
+2
+
+Whats happening here is that we have a function starting with a count of 0. Inside that is what is known as an anonymous function (as it is not defined). At the end of the code we let increment invoke the counter function, whatever is left behind is effectively going to take the place off the counter function. This means that when you run increment() twice and invoke the counter function, it will remember the count outside of its local scope. A closure is formed when a function retains access to the variable count from outside its scope, even after the function has finished executing. This is known as data encapsulation.
