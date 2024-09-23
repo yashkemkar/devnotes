@@ -17,6 +17,11 @@ Low-level languages would be the languages that operate entirely within a machin
 
 High-level languages would be the languages that are interacted with significantly by humans and allow for a variety of human interactions. There are a huge number of variables when it comes to human interaction and design so the instructions can be complex and specific, but the language is read by humans so it is easily understandable and close to english. We can get the general gist of it when we look at it.
 
+## General notes
+
+### How to write your JavaScript code well
+Break down your code into its different functionalities, then invoke them in an order that makes sense, and when it is necessary. This will keep your code very clean and effective.
+
 ## Terminal/Console
 The terminal or the console is where we go to run our javascript files. You can go into the terminal and type in as below:
 ```
@@ -49,7 +54,8 @@ And magically the console will print "hello world" in the next line. It will als
 ### Debugging
 Faulty code will now be a lifelong problem for you as a software developer, its impossible to get it correct on the first try. However, when your program doesn't run correctly, you need to go through a debugging process to identify where the problem lies in your code.
 
-We can use the console to debug our code - in fact it is the most useful way to debug JavaScript code. 
+We can use the console to debug our code - in fact it is the most useful way to debug JavaScript code.
+
 ## Fundamental JavaScript syntax
 
 ### Text
@@ -102,6 +108,9 @@ function myFirstFunction() {
     insert function in here
 }
 ```
+
+**Important note** - while it is obviously possible to execute a function, loop, etc while being efficient and pulling exactly what you need from previous data. It is good practice to assign the calculation to a new variable and just call the variable rather than enter the calculation directly into a function.
+
 #### Rules for Variables:
 1. You cannot start your variable name with a number.
 2. You cannot leave spaces in your variable name - use snakecase or camelcase. Snakecase is when you replace the spaces with underscores. Camelcase is when you make the first letter of the first word lowercase, and then the first letter of every subsequent word uppercase. Example
@@ -222,7 +231,7 @@ let example_array = [1,5,7,8,3,4,5,6,4,2,1]
 let i = 0
 let length = example_array.length
 console.log(length)
-while() {
+while(i<length) {
     console.log('value was true', i)
     i = i + 1
 }
@@ -240,7 +249,7 @@ let example_array = [1,5,7,8,3,4,5,6,4,2,1]
 let i = 0
 let length = example_array.length
 console.log(length)
-while() {
+while (i<length) {
     console.log('value was true', i, example_array[i])
     i = i + 1
 }
@@ -372,5 +381,254 @@ console.log('the new string is: ', newString)
 
 The code above would return the value of 'hello default2' in the terminal because the argument for string2 was missing in the original addStrings function so JavaScript uses the default value to keep the code from breaking.
 
-## How to write your JavaScript code well
-Break down your code into its different functionalities, then invooke them in an order that makes sense, and when it is necessary. This will keep your code very clean and effective.
+## Data Manipulation
+### String Manipulation
+#### String Concatenation
+We can access values in a string, for example we can pull a particular value at a particular index in the sentence 'this is a string'. See the code below:
+
+```
+let example_sentence = 'this is a string'
+let string_length = example_sentence.length
+
+console.log('Value at the end of the string = ', example_sentence[2])
+```
+
+Now if we want to add two strings together, we would enter code as shown below:
+```
+let combined_string = 'hello world' + ' ' + 'my name is yash'
+
+console.log(combined_string)
+```
+This would print out "hello world my name is yash" in the console.
+
+We can also pull something from another string and join it to ours using the same as above, however instead of a second string you just add an array[i].
+
+#### Addition
+We can also do something called coersion whereby if we add a number and a string of a number, it will put them both together into a new string. For example:
+```
+let combined_string = '3' + 5
+let new_var = combined_string + 6
+console.log(new_var)
+```
+The combined string variable would become '35' due to coersion. And finally the console would display new var being '356' as a string, so the value is not 8 or 14 but '356'. So if you tried to run a typeof function it would result in a string.
+
+#### Subtraction
+If you do subtraction from a string, it will return the string back to a number and give a result of a number. For example:
+```
+let combined_string = '3' + 5
+let new_var = combined_string - 6
+console.log(new_var)
+```
+The console would return the value 29 as a number!
+It is important to be aware of how JavaScript handles these sorts of things in relation to strings, addition/subtraction is different.
+
+### String Methods
+There are inherently built in functions such as length, indexOf, split that we can use in JavaScript. The way they are used is you must have the variable and then put .[insert method] in front of it (there are no square brackets, thats just a place holder). For example for length of a string the code would look like this:
+```
+let example_sentence = 'this is a string'
+let string_length = example_sentence.length
+```
+
+In visual studio code the intellisense is very helpful with this. If you have a variable that you put a period in front of, it will provide a whole list of autofill options for methods that you can manipulate the variable with. If it recognises the data is a string, it will show all the methods for strings, and respectively the same for other types of data. It would be impossible for us to cover or remember all, so just pay attention to your intellisense - you can do a lot of things with methods. Let's cover a few of the important/frequent ones.
+
+In case you are interested, here is a whole documented list of methods available:
+https://www.tutorialspoint.com/javascript/javascript_builtin_functions.htm
+
+#### .indexOf ()
+The first method thats pretty simple to use is indexOf which returns the index where the argument is present within the variable being checked. For example:
+
+```
+let example_sentence = 'this is a string'
+let string_length = example_sentence.length
+
+const contains_the_letter_a = example_sentence.indexOf('a')
+console.log('sentence contains the letter a?', contains_the_letter_a)
+```
+This returns a value of 8 in the console because the letter a is in the 8th position in the string. If we were to switch the argument in the indexOf function to something that isn't present in the variable, for example 'z', then it would return a value of -1 meaning that its not present.
+
+#### .split ()
+We can use split to return the values of the string split up into individual components, and the components can be characters, words, sentences, depending on how you formulate the function. For example if we wanted to get back all the letters in a string the fuction would look like below:
+```
+let example_sentence = 'this is a string'
+const split_sentence = example_sentence.split('')
+console.log(split_sentence)
+```
+This would return an array in the console with values: 
+[
+  't', 'h', 'i', 's',
+  ' ', 'i', 's', ' ',
+  'a', ' ', 's', 't',
+  'r', 'i', 'n', 'g'
+]
+
+This is because the argument inside of the split function is '' two speech marks with no space in between - so the function is instructed to split up every character. If we wanted to split up the words, we would put a space inside the speech marks as shown below:
+```
+let example_sentence = 'this is a string'
+const split_sentence = example_sentence.split(' ')
+console.log(split_sentence)
+```
+This would return an array in the console with values: 
+[ 'this', 'is', 'a', 'string' ]
+
+Now, if we wanted to do sentences, we would enter a period '.' inside the function as an argument. Pro tip: enter a space in front of the period so that the values you receive (which will be smaller strings) don't have a space at the start. See the code below:
+```
+let example_sentence = 'this is a string. this is also a string'
+const split_sentence = example_sentence.split('. ')
+console.log(split_sentence)
+```
+This would return an array in the console with values: 
+[ 'this is a string', 'this is also a string' ] - this is with a space after the period.
+[ 'this is a string', ' this is also a string' ] - this is without a space after the period.
+
+Essentially a split function filters out whatever the argument is that you put inside it.
+
+#### .includes ()
+Includes is a cool function that will return a true or false if the argument is present in the variable or string that is being checked. For example:
+```
+let example_sentence = 'this is a string'
+const value_exists = example_sentence.includes('a')
+console.log(value_exists)
+```
+The console will show true because 'a' is present, if instead we searched for 'z', it would show up false.
+
+#### .replace() and .replaceAll()
+This is very self-explanatory, however there are two arguments that go inside the function, first is what you want to remove, and second is what you want to replace it with - replace.(a, b). There are two versions - replace will replace only the first encounter of the value matching the argument inside, whereas replace all will...you guessed it...replace all encounters of the argument inside. Once it has done its function it will return the edited string into the console. If you enter a value that isn't in the string, it will just return the original string. See below for .replace and .replaceAll:
+```
+let example_sentence = 'this is a string'
+const replace_letter = example_sentence.replace('i, I')
+console.log(replace_letter)
+```
+This would return 'thIs is a string'
+
+```
+let example_sentence = 'this is a string'
+const replace_letter = example_sentence.replaceAll('i, I')
+console.log(replace_letter)
+```
+This would return 'thIs Is a strIng'.
+
+A very useful example of this is if you wan't to display some text or a file name that has been saved with - or _ in the string. We can use replace all to remove them and replace with spaces so that it looks clean.
+
+#### .slice()
+Slice is very common as a function, it typically takes two arguments, a starting index and ending index. It will then return just that portion of the string. For example:
+```
+let example_sentence = 'this is a string'
+const slice_word = example_sentence.slice(2,8)
+console.log(slice_word)
+```
+The code above would return a portion of the string 'is is' as that is everything included from "i" which is index = 2, and up to "s" which is index = 8.
+
+If you only enter 1 argument, then it will still work, but it will take everything after the argument inputted. For example:
+```
+let example_sentence = 'this is a string'
+const slice_word = example_sentence.slice(5)
+console.log(slice_word)
+```
+This would return 'is a string' as that is whats left after index = 5.
+
+#### regex
+Regex is a way of checking if a string or password or any regular expression contains certain characters. There are some very complicated rules for regex but you can implement this in your JS by going to chat gpt and asking it to provide some code as well as how to implement it.
+
+### Array Methods
+Arrays or lists are very important data structures and they hold a variety of different data, keeping in mind that each value has to be a valid data type. Just like the string, arrays also have a bunch of methods that can be used to manipulate data in them. The primary things we have to do with objects and arrays is follow the CRUD operations. CRUD stands for create, read, update and delete. 
+
+This way any information stored in an array can be constantly updated in a database through user interactions. There is a certain order in which we can learn these operations.
+#### Dimensionality of arrays
+
+#### Read
+This is probably the most simple. Similar to how we used the array function above, we can input any index value in the argument to read the corresponding word in that position within the array. See the function below for an example:
+```
+let simple_array = ['yash','is','cool']
+console.log (simple_array[0])
+```
+The console will return 'yash' as that is the value in the 0th position in the array.
+
+Most of the read methods are similar to string such as .includes, .ofType, .indexOf, .slice, etc. These will work just the same as they did with the string.
+
+**Join**
+An interesting one that is different from strings is .join. For strings we have split as a string is one value together. Whereas in an array we have multiple values that can be joined together. We can use .join to join elements inside an array together with a value that we parse into the argument. For example:
+```
+let simple_array = ['yash','is','cool']
+let check = simple_array.join('-')
+console.log(check)
+```
+The console would return the string 'yash-is-cool'.
+
+**Reverse**
+We can also reverse the order of the values in the array using the reverse function. It takes no arguments. For example:
+
+```
+let simple_array = ['yash','is','cool']
+let check = simple_array.reverse()
+console.log(check)
+```
+Entering this into the console returns the array [ 'cool', 'is', 'yash' ].
+
+**Sort**
+We can also sort the order of the values in the array into an alphabetical order using the sort function. It takes no arguments. For example:
+
+```
+let simple_array = ['yash','is','cool']
+let check = simple_array.sort()
+console.log(check)
+```
+Entering this into the console returns the array [ 'cool', 'is', 'yash' ]. It just so happens to be the same as the reverse one for these particular strings, but it has sorted it alphabetically.
+
+#### Update
+With our initial understanding of JavaScript we can update the information within an array just by assigning a new value to said position for example: 
+```
+simple_array[1] = 'hello'
+console.log (simple_array)
+```
+If we follow up the read code with this code just above, the console will now return [ 'yash', 'hello', 'cool' ] as simple_array has now been updated with a new value in index position 1.
+
+ However, this provides very limited functionality since we would have to know the index position of a particular value to replace it, and we could be working in an evergrowing data structure of thousands of values for a single variable out of thousands. This is not practical so we use different methods to update.
+
+There are 4 methods of updating data in an array - pop, push, shift and unshift (shift and unshift are much less common than pop and push). Pop/push either clip off or add values to the **end of an array**, whereas shift/unshift do the same but to the **start of an array**.
+
+**Push** will add a value at the end of an array. The push function takes one argument as shown in the example below:
+```
+let simple_array = ['yash','is','cool']
+simple_array.push('new word')
+console.log(simple_array)
+```
+This would return an updated array into the console - [ 'yash', 'is', 'cool', 'new word' ].
+
+**Pop** will simply delete the value at the end of an array entirely, and does not take any arguments. See the example below:
+```
+let simple_array = ['yash','is','cool']
+simple_array.pop()
+console.log(simple_array)
+```
+This would return an updated array into the console - [ 'yash', 'is' ]. The last value can be kicked without knowing what the length of this array is.
+
+**Shift** will simply delete the value at the start of an array. The shift function does not take any arguments - it isimilar to pop. See the example below:
+```
+let simple_array = ['yash','is','cool']
+simple_array.shift()
+console.log(simple_array)
+```
+This would return an updated array into the console - [ 'is', 'cool' ].
+
+**Unshift** will add a value at the start of an array. The unshift function takes one argument as shown in the example below:
+```
+let simple_array = ['yash','is','cool']
+simple_array.unshift('new word')
+console.log(simple_array)
+```
+This would return an updated array into the console - [ 'new word', 'yash', 'is', 'cool' ].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
