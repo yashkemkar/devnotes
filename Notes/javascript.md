@@ -1132,3 +1132,189 @@ We don't throw errors that much, but try-catch is really good.
 
 #### Guard clause
 A guard clause is something used in functions to execute different logic for elements within an array or list of items. For example if integer is even continue, if integer is odd push from array, then back to even continue, etc. It runs through the whole for loop with different instructions for different integers. It is a way to filter out an array.
+
+## Domain Object Model (DOM) and its Manipulation
+The document object model is the JavaScript interactive version of an HTML document. Basically we take our HTML document and model it as an object, so that we can interact with it in JavaScript. This is no different to interacting with objects in JavaScript, except that we will be modifying in an HTML document instead and it will look different on our webpage.
+
+### How to use JavaScript in HTML
+Firstly the console in your browser is your best friend to see what is happening on the webpage when you assign bits of code. 
+
+The way to edit your HTML doc is to insert JavaScript within your HTML doc's body section just before the body closing tag; you can type in regular JavaScript syntax here.
+
+#### Targeting an element
+To reference an HTML element in your script, you can use many different methods to manipulate those elements, however a very common one is .getElementById() where you can parse in the element name. This will allow you to have control over the animation/interaction with this HTML element.
+```
+console.log(document.getElementById('close-modal-btn'))
+```
+But an even better way to do this would be to assign that code to a variable as we would in classic JS:
+```
+let modalBtn = document.getElementById('close-modal-btn)
+```
+Now we can manipulate this variable through Javascript by referencing it as we normally would. To interact with any element we need to target it in our JS.
+
+#### addEventListener
+It isnt enough to just target an element, we need the action or response to occur when a particular event happens or when there is interaction with the element on the webpage. What we would use here is a method called "addEventListener", which tells the HTML element to listen for a particular event. See the example below:
+```
+let modalBtn = document.getElementById('open-modal-btn')
+        
+    function handleOpenModal() {
+       console.log('button is working') 
+       }
+
+    modalBtn.addEventListener('click', handleOpenModal)
+```
+Now if we go to our browser console and press the 'Open Modal' button, we can see in the console that the console is printing 'button is working'. This means the event is being registered, in fact it even has a counter for the number of times an event happened.
+
+#### getElementById
+We can also actually get the button to open, or change how it displays, basically some type of animation or interaction that alters the look of it when an event occurs. If we look at the html element prior to event, we can see that it is set to display:none:
+```
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal..</p>
+            <button id="close-modal-btn">Close Modal</button>
+        </div>
+    </div>
+```
+We can actually target the modal specifically by using the getElementById function again:
+```
+ <script>
+        let modalBtn = document.getElementById('open-modal-btn')
+        let modal = document.getElementById ('modal')
+        function handleOpenModal() {
+           console.log('button is working') 
+           modal.style.display = 'flex'
+        }
+        modalBtn.addEventListener('click', handleOpenModal)
+    </script>
+```
+The code above now causes the button to open up an extra display below it with some text when it is clicked, making the website dynamic and interactive, and not a static page.
+
+#### querySelector (target class)
+We can also target a class by using something called querySelector. For example, in this example above we modified the open modal button, yet the close modal button does not do anything yet. So we can target that using the following code:
+```
+    <script>
+        let modalBtn = document.getElementById('open-modal-btn')
+        let closeModalBtn = document.getElementById('close-modal-btn')
+        let modal = document.getElementById ('modal')
+        let xBtn = document.querySelector('.close')
+        function handleOpenModal() {
+           console.log('button is working') 
+           modal.style.display = 'flex'
+        }
+        modalBtn.addEventListener('click', handleOpenModal)
+      
+        function handleCloseModal() {
+            modal.style.display = 'none'    
+        }
+        closeModalBtn.addEventListener('click', handleCloseModal)
+        xBtn.addEventListener('click', handleCloseModal)
+    </script>
+```
+This is how we can make things functional using JavaScript.
+
+#### Access value of text and modify in JS
+If we want to be able to target text area, in this case it is an id, sow e simply use getElementById:
+```
+let textArea = document.getElementById (text-area)
+```
+If we insert that text area targeting code into the button code above:
+```
+<script>
+        let modalBtn = document.getElementById('open-modal-btn')
+        let closeModalBtn = document.getElementById('close-modal-btn')
+        let modal = document.getElementById ('modal')
+        let xBtn = document.querySelector('.close')
+        let textArea = document.getElementById ('text-area')
+
+        function handleOpenModal() {
+           console.log(textArea.value) 
+           modal.style.display = 'flex'
+        }
+        modalBtn.addEventListener('click', handleOpenModal)
+      
+        function handleCloseModal() {
+            modal.style.display = 'none'    
+        }
+        closeModalBtn.addEventListener('click', handleCloseModal)
+        xBtn.addEventListener('click', handleCloseModal)
+    </script>
+```
+
+#### How to make a submit form button work without refreshing the whole page
+Not sure why it was decided that way, however the default action for submitting is a form is to refresh the whole page. However, this can be disruptive and can end up making the user's experience of the website quite slow, so we can submit button in a different way and cancel the default behaviour. We can still make it work on an event, ie with a click, but the way we do it is to assign an onsubmit attribute in the form open tag and set it equal to return handleSubmitForm(event) with the same event parsed into the handleSubmitForm function below in our JavaScript code. See the code below for an example:
+```
+    <form id="form-example" onsubmit="return handleSubmitForm(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    ...
+    <script>
+        let modalBtn = document.getElementById('open-modal-btn')
+        let closeModalBtn = document.getElementById('close-modal-btn')
+        let modal = document.getElementById ('modal')
+        let xBtn = document.querySelector('.close')
+        let textArea = document.getElementById ('text-area')
+        function handleOpenModal() {
+            console.log(textArea.value) 
+            modal.style.display = 'flex'
+            textArea.value = 'hi mum'
+        }
+        modalBtn.addEventListener('click', handleOpenModal)
+  
+        function handleCloseModal() {
+            modal.style.display = 'none'    
+        }
+        closeModalBtn.addEventListener('click', handleCloseModal)
+        xBtn.addEventListener('click', handleCloseModal)
+
+        function handleSubmitForm (event){
+            event.preventDefault()    
+        }
+    </script>
+```
+As you can see above, the form opening tag needs to have the onsubmit attribute added there with the event parsed into the function being invoked. And the same event needs to be parsed into the code for the actual function below.
+ 
+#### Accessing information submitted through the website
+To be able to capture information from forms, we need to assign variables to the fields in the form - this can be with the rest of the 'let' variables at the top of the script section. For example:
+```
+let nameInput = document.getElementById('name')
+let ageInput = document.getElementById('age')
+```
+This would allow those fields to be variables that we can control in JS. In addition to these, in the handleSubmitForm function we could put in the following:
+```
+console.log('name: ', nameInput.value)
+console.log('age: ', ageInput.value)
+```
+This puts the information into an object for both name and age. Now we can do whatever we want with our form.
+
+#### Creating HTML directly through JavaScript
+There will be times where we need to create HTML through JavaScript, for example something gets filled in one one page, and displayed as the filled in information on the next page. See the code below for how to do it:
+```
+let contentArea = document.getElementById('content-area')
+contentArea.innerHTML = '<h1>Hi Mum </h1>'
+``` 
+This gets added to the top of the script section. Now when we go to the console on the browser we can see that we have actually modified the div tag and actually added in an h1 tag in the content area div. Beyond this, we can add:
+```
+  let newHTML = document.querySelector('#content-area h1')
+    newHTML.style.background = 'yellow'
+    newHTML.style.color = 'pink'
+    newHTML.style.padding = '3rem'
+```
+This allows us to target the content area heading with a variable, and now we can repeatedly edit the variable as we want.
+
+#### Linking a JS file to HTML through a link in the head section.
+We can create a script tag and give it a source linked to a JavaScript file. However, the one chritical thing you need to do is to "defer" it - which means to add it last in the course of action. Here's an example of what it would look like:
+```
+<script src = "chapter_2.js" defer></script>
+```
+
+## User events and Dynamic DOM update
+
+
+## Event delegation and bubbling
+
+## Dynamic page styling
