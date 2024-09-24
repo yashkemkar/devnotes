@@ -526,6 +526,9 @@ console.log(slice_word)
 ```
 This would return 'is a string' as that is whats left after index = 5.
 
+#### parseInt()
+This one is pretty self explanatory, it allows you to take a string or array with numbers in a string data type and parse the integer out into a new array or string of data type numbers. The argument must be a numeric value inside of a string.
+
 #### regex
 Regex is a way of checking if a string or password or any regular expression contains certain characters. There are some very complicated rules for regex but you can implement this in your JS by going to chat gpt and asking it to provide some code as well as how to implement it.
 
@@ -534,6 +537,23 @@ Arrays or lists are very important data structures and they hold a variety of di
 
 This way any information stored in an array can be constantly updated in a database through user interactions. There is a certain order in which we can learn these operations.
 
+#### Create
+Creating arrays can be somewhat simple - it is only a matter of assigning empty square brackets to a variable. Quite often you will put it inside some sort of function that manipulates an existing array, so you want to write a function that takes an array as the argument. See the example below:
+```
+let example_array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+    
+function arrayFilter (arr) {
+    let new_array = []
+
+    for (let i=0;arr.length;i++) {
+        if (arr[i]%2!=0){
+            console.log(example_array[i])
+        }
+    }
+}
+```
+If we enter this in the console, it would return - 
+As can be seen in the code above, we have put arr as the argument in the function that manipulates arrays - arr represents the array data type, so this sets the function to take any array as an argument in the future. 
 #### Read
 This is probably the most simple. Similar to how we used the array function above, we can input any index value in the argument to read the corresponding word in that position within the array. See the function below for an example:
 ```
@@ -1040,15 +1060,75 @@ console.log('code continued to execute')
 ```
 The code above shows that there is an object with the key word with a value of 'nice'. However, we can put inside our function a try-catch block so that it doesnt just break the code. Within the try section we would put our function and within the catch section we need to put correct code, which is most often just console log the error message. Whatever we put inside the catch() brackets will be what the error is labeled, but it will always be an error. If we run that code above, the console will return:
 
-** TypeError: Cannot read properties of undefined (reading 'world')
-    at problematicCodeBlock (C:\Users\yashk\OneDrive\Documents\Github\the-complete-javascript-course\notes\chapter_3.js:96:48)
-    at Object.<anonymous> (C:\Users\yashk\OneDrive\Documents\Github\the-complete-javascript-course\notes\chapter_3.js:103:1)
-    at Module._compile (node:internal/modules/cjs/loader:1469:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
-    at Module.load (node:internal/modules/cjs/loader:1288:32)
-    at Module._load (node:internal/modules/cjs/loader:1104:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:174:12)
-    at node:internal/main/run_main_module:28:49
-code continued to execute**
+**TypeError: Cannot read properties of undefined (reading 'world')**
+    **at problematicCodeBlock**
+    **(C:\Users\yashk\OneDrive\Documents\Github\the-complete-javascript-course\notes\chapter_3.js:96:48)**
+    **at Object.**
+    **(C:\Users\yashk\OneDrive\Documents\Github\the-complete-javascript-course\notes\chapter_3.js:103:1)**
+    **at Module._compile (node:internal/modules/cjs/loader:1469:14)**
+    **at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)**
+    **at Module.load (node:internal/modules/cjs/loader:1288:32)**
+    **at Module._load (node:internal/modules/cjs/loader:1104:12)**
+    **at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:174:12)**
+    **at node:internal/main/run_main_module:28:49**
+**code continued to execute**
 
 As you can see above, it still prints "code continued to execute" at the end, indicating that the rest of the code was executed, despite the error.
+
+Whenever you have some code that is temperamental at the best of times or you are fetching data from an external source and not sure about the validity of the date, or even if the response is going to be successfully met. If it is a risk point, a try-catch block can be a great contingency for your error handling.
+
+#### Debugging
+Debugging is a critical skill for a programmer, however debugging starts when you write the code. You should write the code with provisions in place to make it easier for debugging in the future. One such thing that can help is to add a console.log phrase in at the start of your try block so that you know where the code failed.
+```
+const broken_object = {
+    word:'nice'
+}
+
+function problematicCodeBlock() {
+    try {
+        console.log('Attempted the try block')
+        const sub_object = broken_object.hello.world
+        console.log(sub_object)
+    } catch(err){
+        console.log(err)
+    }
+}
+
+problematicCodeBlock()
+
+console.log('code continued to execute')
+```
+If we entered that it would return the same error message as in the try-catch block, however with the string 'Attempted the try block' at the very start of that message. This is an indicator that the console log was executed, and then somewhere in the two lines below it the code failed, taking us to the console log error message.
+
+Now since we did not console.log sub object, we can deduce that the error must have been in the line above with the const sub_object. This in combination with the error message should be enough information to debug.
+
+One more thing to note is that instead of the standard console.log(err) which gives us the error message as well as the stack trace (everything below the error) as shown in the try-catch block section above. The stack trace can be a bit complex, however it can guide you as to where the problem is as it does highlight line numbers sometimes.
+
+If we wanted we can also modify the try-catch block to get only the literal error message, without the stack trace, as shown below:
+```
+catch(err){
+        console.log(err.message)
+    }
+```
+The above code is just a small snippet from the larger code, but it shows the console.log(err) changed to console.log(err.message). Running the console would return:
+**Attempted the try block**
+**Cannot read properties of undefined (reading 'world')**
+**code continued to execute**
+
+#### Throw error
+We can also generate a custom error message how we want using the throw error function. Error() is a class in JavaScript and needs to be invoked with a capital E. The code below shows an example of setting up your own error message:
+```
+function throwError() {
+    throw new Error('custom error message')
+}
+
+throwError()
+```
+Running this in the console would return the entire error message with the stack trace, however the error message would be our custom one.
+**Error: custom error message**
+    **remaining stack trace...*
+
+We don't throw errors that much, but try-catch is really good.
+
+#### Guard clause
+A guard clause is something used in functions to execute different logic for elements within an array or list of items. For example if integer is even continue, if integer is odd push from array, then back to even continue, etc. It runs through the whole for loop with different instructions for different integers. It is a way to filter out an array.
