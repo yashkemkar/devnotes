@@ -367,3 +367,127 @@ console.log(word_counter(sentence_string))
 ```
 Console:
 { I: 2, like: 6, to: 2, eat: 3, cool: 1 }
+
+## Set 3 - DOM Manipulation Functions
+
+### Changing text content, headings, etc
+Basic DOM Manipulation: How do you select an element with the ID main-title and change its text-content to "Welcome to the DOM World"?
+```
+let maintitle = document.getElementById('main-title')
+maintitle.innerText = "Welcome to the DOM World"
+```
+
+### Event handling - apply a function on an event happening
+Write the JavaScript code to listen for a click event on a button with the ID submit-btn and alert "Button Clicked!" See the code below for an example:
+```
+let submitButton = document.getElementById('submit-btn')
+
+function alertFunction(){
+    alert("Button Clicked!")
+}
+
+submitButton.addEventListener('click', alertFunction)
+```
+
+### Dynamic styling
+Sometimes we need to have HTML elements change their styling dynamically for example when someone hovers over something, or when someone opens a window, etc. See the code below for a simple example of styling dynamically.
+
+How can you change the background colour of a <div> with the class "highlight" to yellow when a user hovers over it using JavaScript?
+```
+let divHighlight = document.querySelector('.highlight')
+divHighlight.addEventListener ('mouseover', highlightFunction)
+
+highlightFunction() {
+    divHighlight.style.background = 'yellow'
+}
+```
+
+### Element creation and insertion
+To create or insert a new element there are specific JavaScript methods. See the example below.
+
+Describe how to create a new <li> element, set its text content to "New Item", and append it to an existing <ul> with the ID list-container:
+```
+let divHighlight = document.querySelector('.highlight')
+divHighlight.addEventListener ('mouseover', highlightFunction)
+
+highlightFunction() {
+    divHighlight.style.background = 'yellow'
+}
+```
+
+### Form handling
+The default action for submitting a form is to refresh the page, however this can be disrupting, instead we will write a script to prevent the default submission of a form with the ID form-example and instead console log the value of a text input field within the form when the submit button is clicked.
+```
+let form = document.getElementById('form-example')
+let textInput = document.getElementById('text-input-field')
+
+function handleSubmitForm (e){
+    e.preventDefault()
+    console.log(textInput)
+}
+
+form.addEventListener ('click', handleSubmitForm)
+```
+
+### Event bubbling
+Sometimes there will be an element with an event listener attached that is activated while inside a container that also has another event listener attached. We don't want both events being responded to, but want just one. Otherwise they can overlap each other and not work well. Provide an example of stopping event bubbling when clicking on a <button> contained within a <div> that both have click event listeners attached.
+```
+let btn = document.querySelector('button')
+let divContainer = document.getElementById('div')
+
+function stopButtonPropagation (e) {
+    e.stopPropagation()
+}
+
+btn.addEventListener('click', stopButtonPropagation)
+```
+Not 100% sure about this one tbh.
+
+### Dynamic page styling
+Sometimes we will have elements on our pages that can be toggled for different effects, for example light/dark mode for websites. How can we toggle a class active on an element when it is clicked, ensuring that if the class is present it gets removed, and if its not, it gets added?
+```
+let toggleElement = document.getElementById('toggle-element')
+
+function toggleStyle() {
+    toggleElement.classList.toggle('active')
+}
+
+toggleElement.addEventListener('click', toggleStyle)
+```
+
+### Advanced event handling
+Write JavaScript code to change the text content of a paragraph element to display the current time when a button is clicked. This can be applied to displaying any other item we want, in this example below we are showing time.
+```
+let paragraphElement = document.querySelector('p')
+let xbtn = document.querySelector('button')
+
+const currentTime = now.toLocaleTimeString
+
+function displayTime(){
+   paragraphElement.innerText = currentTime
+}
+xbtn.addEventListener('click', displayTime)
+```
+Also not sure about this one.
+
+### Event listener removal
+Nothing too complex here, just removing an event listener. The reason why you might need to remove an event is if you only want it to operate conditionally. You may have certain situations you want it and certain situations you dont. See the code below for an example:
+```
+document.getElementById('james-is-cool').removeEventListener('click', myFunction)
+```
+
+### Manipulate attributes and properties
+Attributes are basically properties defined in the HTML and properties are basically attributes defined in JavaScript. So if you are working in JavaScript its called a property - the descriptor of the tag, and if you are working in HTML its called an attribute.
+For example, if we wanted JavaScipt code to change the src attribute of an <img> element to a different destination, here is what the code might look like:
+```
+document.querySelector('img').setAatribute('src','new-image.png')
+```
+
+### Utilise dataset attributes
+Sometimes HTML elements will hold data inside the tag, using data attributes. This is how to use data-* attributes within an HTML element to store extra information and how to access this information using JavaScript. See the code below:
+```
+let informationDiv = document.getElementById('info')
+console.log(informationDiv.dataset.userId)
+
+<div id = "info" data-user-id="12345" data-user-role="admin"></div>
+```

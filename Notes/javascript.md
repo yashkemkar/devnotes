@@ -1136,7 +1136,7 @@ A guard clause is something used in functions to execute different logic for ele
 ## Domain Object Model (DOM) and its Manipulation
 The document object model is the JavaScript interactive version of an HTML document. Basically we take our HTML document and model it as an object, so that we can interact with it in JavaScript. This is no different to interacting with objects in JavaScript, except that we will be modifying in an HTML document instead and it will look different on our webpage.
 
-### How to use JavaScript in HTML
+### JavaScript in HTML, User events and Dynamic DOM update
 Firstly the console in your browser is your best friend to see what is happening on the webpage when you assign bits of code. 
 
 The way to edit your HTML doc is to insert JavaScript within your HTML doc's body section just before the body closing tag; you can type in regular JavaScript syntax here.
@@ -1190,7 +1190,7 @@ We can actually target the modal specifically by using the getElementById functi
 ```
 The code above now causes the button to open up an extra display below it with some text when it is clicked, making the website dynamic and interactive, and not a static page.
 
-#### querySelector (target class)
+#### querySelector (target class or tag)
 We can also target a class by using something called querySelector. For example, in this example above we modified the open modal button, yet the close modal button does not do anything yet. So we can target that using the following code:
 ```
     <script>
@@ -1211,10 +1211,25 @@ We can also target a class by using something called querySelector. For example,
         xBtn.addEventListener('click', handleCloseModal)
     </script>
 ```
-This is how we can make things functional using JavaScript.
+This is how we can make things functional using JavaScript. 
+
+To target a class within a tag you need . in front of the class name to access it.
+
+To target the tag itself, you don't need a . in front
+
+#### createElement
+We can use creatElement as a method in JavaScript to literally create a new element in the HTML file. When using the create Element you must put the html tag for the element inside the brackets, and then you can edit the variable to which it is assigned in JS afterwards. See the code below:
+```
+let listContainer = document.getElementById('list-container')
+let newItem=document.createElement ('li')
+newItem.innerText = 'New Item'
+listContainer.appendChild(newItem)
+```
+.appendChild is the method you can use to add the new element you just created to an existing element. It will pin it to the end of the existing element.
+
 
 #### Access value of text and modify in JS
-If we want to be able to target text area, in this case it is an id, sow e simply use getElementById:
+If we want to be able to target text area, in this case it is an id, so we simply use getElementById:
 ```
 let textArea = document.getElementById (text-area)
 ```
@@ -1241,8 +1256,9 @@ If we insert that text area targeting code into the button code above:
     </script>
 ```
 
+### Event delegation and bubbling 
 #### How to make a submit form button work without refreshing the whole page
-Not sure why it was decided that way, however the default action for submitting is a form is to refresh the whole page. However, this can be disruptive and can end up making the user's experience of the website quite slow, so we can submit button in a different way and cancel the default behaviour. We can still make it work on an event, ie with a click, but the way we do it is to assign an onsubmit attribute in the form open tag and set it equal to return handleSubmitForm(event) with the same event parsed into the handleSubmitForm function below in our JavaScript code. See the code below for an example:
+Not sure why it was decided that way, however the default action for submitting a form is to refresh the whole page. However, this can be disruptive and can end up making the user's experience of the website quite slow, so we can submit button in a different way and cancel the default behaviour. We can still make it work on an event, ie with a click, but the way we do it is to assign an onsubmit attribute in the form open tag and set it equal to return handleSubmitForm(event) with the same event parsed into the handleSubmitForm function below in our JavaScript code. See the code below for an example:
 ```
     <form id="form-example" onsubmit="return handleSubmitForm(event)">
         <label for="name">Name:</label>
@@ -1278,18 +1294,7 @@ Not sure why it was decided that way, however the default action for submitting 
 ```
 As you can see above, the form opening tag needs to have the onsubmit attribute added there with the event parsed into the function being invoked. And the same event needs to be parsed into the code for the actual function below.
  
-#### Accessing information submitted through the website
-To be able to capture information from forms, we need to assign variables to the fields in the form - this can be with the rest of the 'let' variables at the top of the script section. For example:
-```
-let nameInput = document.getElementById('name')
-let ageInput = document.getElementById('age')
-```
-This would allow those fields to be variables that we can control in JS. In addition to these, in the handleSubmitForm function we could put in the following:
-```
-console.log('name: ', nameInput.value)
-console.log('age: ', ageInput.value)
-```
-This puts the information into an object for both name and age. Now we can do whatever we want with our form.
+### Dynamic page styling
 
 #### Creating HTML directly through JavaScript
 There will be times where we need to create HTML through JavaScript, for example something gets filled in one one page, and displayed as the filled in information on the next page. See the code below for how to do it:
@@ -1306,15 +1311,210 @@ This gets added to the top of the script section. Now when we go to the console 
 ```
 This allows us to target the content area heading with a variable, and now we can repeatedly edit the variable as we want.
 
-#### Linking a JS file to HTML through a link in the head section.
+#### Updating a JS file to affect HTML
 We can create a script tag and give it a source linked to a JavaScript file. However, the one chritical thing you need to do is to "defer" it - which means to add it last in the course of action. Here's an example of what it would look like:
 ```
 <script src = "chapter_2.js" defer></script>
 ```
+#### Accessing information submitted through the website
+To be able to capture information from forms, we need to assign variables to the fields in the form - this can be with the rest of the 'let' variables at the top of the script section. For example:
+```
+let nameInput = document.getElementById('name')
+let ageInput = document.getElementById('age')
+```
+This would allow those fields to be variables that we can control in JS. In addition to these, in the handleSubmitForm function we could put in the following:
+```
+console.log('name: ', nameInput.value)
+console.log('age: ', ageInput.value)
+```
+This puts the information into an object for both name and age. Now we can do whatever we want with our form.
 
-## User events and Dynamic DOM update
+### JavaScript Methods
+#### .innerText
+This method allows you to change the text string inside a variable once you have already targeted that element in the HTML and assigned it to a variable using 'getElementByID'. For example:
+```
+let maintitle = document.getElementById('main-title')
+maintitle.innerText = "Welcome to the DOM World"
+```
+This would change the text inside main-title to "Welcome to the DOM World"
+
+## Modern OOP with classes, constructors and inheritance
+This is a system that is built around classes and objects. In JavaScript a class is a template for creating an object. Some of the objects might have a key-value pair like a name and an age. Now if we want to create a skeleton or a template for creating that person in the future, we can use classes.
+### Defining and instantiating classes
+Lets say that we started off with an object with a key-value pair in it relating to a person such as below:
+```
+const person = {
+    name: 'Yash',
+    age: 27
+}
+```
+Now, if we want to define this template for our person, so that we can make more people, we would use the class declaration. Note - the best practice for initialising classes is to name them with an uppercase first letter. See the example below for a class declaration:
+```
+class Person {
+    //class body
+}
+const you = new Person()
+```
+This calls it as a method and we make a new version before we start editing it. Now this is a very simple way to call a class. 
+
+### initialising properties with constructors
+What happens if we actually wanted it to have some properties and default information? For that we can use what is known as a constructor. When we are constructing our template we might have some default values. See the example below (using the code above as well) for calling a class with default values:
+```
+class Person {
+    //class body
+    constructor (name,age){
+        this.name=name; //name is a property of the class
+        this.age=age; //age is a property of the class
+    }
+}
+
+const cherry = new Person('Cherry', 24)
+const pa = new Person('Pa, 52)
+const ma = new Person('Ma', 51)
+
+console.log(cherry)
+console.log(pa)
+console.log(ma)
+```
+The above code would return: 
+Person { name: 'Cherry', age: 24 }
+Person { name: 'Pa', age: 52 }
+Person { name: 'Ma', age: 51 }
+
+this.name is equal to the namethat gets parsed in as the constructor. What we have done here is that name is now a property of the class, and its the same for age. Now if we put new values into the class Person, we get a new object representing the new person by simply calling the class like a function.
+
+### Assigning methods particular to a class
+We can also define a method within the class similar to a function without having to instantiate it with the function tag. Instead we have now given every person access to this method that is instantiated within the class. See an example below:
+```
+class Person {
+    //class body
+    constructor (name,age){
+        this.name=name;
+        this.age=age;
+    }
+
+    greet() {
+        console.log('Hello my name is ', this.name)
+    }
+}
+
+const cherry = new Person('Cherry', 24)
+const pa = new Person('Pa', 52)
+const ma = new Person('Ma', 51)
+const yash = new Person('Yash', 27)
+
+console.log(cherry.age)
+yash.greet()
+```
+
+We can call the age, and we can greet the person. The above code would print this:
+24
+Hello my name is  Yash.
+
+Basically we have instantiated that using this person class will give access to the greet() method for those constants, and those constants only. This allows us to use specific functions in specific scenarios.
+
+### Understand the prototype chain and how objects inherit properties and methods
+We can also create new classes that inherit properties of prior classes. This is useful when you already have information like a person's details, and you want to assign something else to them as a key value pair. For example, if we wanted to assign a favourite videogame we can create another class that extends the person class. See the example below (continued on from above code relating tot he Person class):
+```
+class Person {
+    constructor (name, age){
+        this.name = name
+        this.age = age
+    }
+}
+class Gamer extends Person {
+    constructor(name, age, videogame){
+        super(name, age)
+        this.videogame = videogame
+    }
+}
+
+const nerdyGuy = new Gamer('Ash', 10, 'Pokemon')
+console.log(nerdyGuy)
+```
+The console prints - Gamer { name: 'Ash', age: 10, videogame: 'Pokemon' }.
+This way we can define all of these templates that are dependent on all of these other templates. It means that as we instantiate new versions of the object, it can be so much easier to just define a new Gamer off the Person class, rather than writing out a whole new object with all the key value pairs.
+
+This process above is called Inheritance. When a new class inherits the template of a parent class, and when we define a new version that is called instantiation.
+
+### Getters and setters
+It's pretty self-explanatory, but a getter is to get the information and setter is to set the information, and they are methods that we define within a class. A common practice is for the entity within the class to have an underscore in front of the name and then we assign the name. We can then define the get name method (keyword get in front of it). See the example below:
+```
+class MyClass {
+    constructor(name) {
+        this._name = name
+    }
+
+    get name(){
+        return this._name
+    }
+
+    set name(value){
+        this._name = value
+    }
+}
+
+const obj = new MyClass('Moksh')
+console.log(obj)
+```
+This would return: {_name: 'Moksh'}
+
+These methods as shown above are specifically for retrieving and updating new properties with the instantiated class. As shown above we can instantiate a new version of MyClass as shown above. The console.log above returns the class itself as an object, we can also return just the name within the object as we normally would:
+```
+console.log(obj.name)
+```
+The above would return 'Moksh'.
+
+To update the value of name, we could just assign a new value to obj.name if we parse in a value as the set name function takes an input as a value and will change the name to the new value. See an example shown below:
+```
+obj.name = 'Pranav'
+console.log(obj.name)
+```
+This would then update the name and return - Pranav.
 
 
-## Event delegation and bubbling
+### The 'this' keyword
+Now, getters and setters look like functions, but are technically not necessary:
+```
+nerdyGuy.videogame = 'League of Legends'
+console.log(nerdyGuy)
+```
+This would also return an updated value for the game:
+Gamer { name: 'Ash', age: 10, videogame: 'League of Legends' }
 
-## Dynamic page styling
+However, the benefit of using getters and setters is that we can intercept the update with logic in the middle. For example when a new value gets updated we can add in logic of console.log('Fetched new name') in between, where we would not be able to do that by directly accessing the value in an object as shown with the nerdyGuy code above. All we can do with the above syntax is change the value we cannot console.log the new value. However in the case, as shown below, we can console.log the new value within the same code:
+```
+class MyClass {
+    constructor(name) {
+        this._name = name
+    }
+
+    get name(){
+        console.log('Fetched current name')
+        return this._name
+    }
+
+    set name(value){
+        this._name = value
+    }
+}
+
+const obj = new MyClass('Moksh')
+console.log(obj.name)
+
+obj.name = 'Pranav'
+console.log(obj.name)
+```
+This would return:
+Fetched current name
+Moksh
+Fetched current name
+Pranav
+
+### Order of operations
+With a function we can define a function further down the document and access it near the top, however with a class you can only instantiate the class after the class has already been defined above.
+
+
+
+
+
