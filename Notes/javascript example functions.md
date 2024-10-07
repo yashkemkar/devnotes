@@ -491,3 +491,90 @@ console.log(informationDiv.dataset.userId)
 
 <div id = "info" data-user-id="12345" data-user-role="admin"></div>
 ```
+
+## Set 4 - Object Oriented Programming
+Write a JavaScript class named REctangle that has two properties, width and height, initialised through its constructior. Then, instantiate an object of Rectangle with a width of 5 and a height of 10.
+```
+class Rectangle {
+    constructor (width, height){
+        this.width = width
+        this.height = height
+    }
+}
+
+const rect_obj = new Rectangle(5,10)
+console.log(rect_obj)
+```
+
+How do you create a constructor within a class named Circle that initialises a property radius and sets its value based on the argument passed when a new Circle instance is created?
+```
+class Circle {
+    constructor(radius){
+        this.radius = radius
+    }
+}
+
+const new_circle_object = new Circle(4)
+console.log(new_circle_object)
+```
+
+Explain how you would add a method named calculateArea to the rectangle class that calculates the area of the rectangle. How does this method get added to the prototype of the class, and how can all instances of Rectangle access it?
+
+class Rectangle {
+    constructor (width, height){
+        this.width = width
+        this.height = height
+    }
+    calculateArea(){
+        let area = this.width*this.height
+        return area
+    }
+}
+
+const rect_obj = new Rectangle(5,10)
+console.log(rect_obj.calculateArea())
+```
+
+In the context of a class method in JavaScript, what does the 'this' keyword refer to, and how would you use it inside a method named describe in a class Person to access the instance's properties named name and age?
+
+class Person {
+    constructor(name, age){
+        this.name = name
+        this.age = age
+    }
+   describe(){
+    console.log('The name is ' + this.name + ' and the age is ' +this.age)
+   }
+}
+
+const yash = new Person('Yash', 27)
+yash.describe()
+
+const second_person = new Person('Cherry', 24)
+second_person.describe()
+```
+
+Create a class named Animal with a constructor that initialises a property species. Then, define a subclass named dog that inherits from Animal and adds an additional property name in its constructor. How do instances of Dog access methods defined on Animal's prototype?
+```
+class Animal {
+    constructor(species) {
+        this.species = species
+    }
+    describe (){
+        console.log(this.species)
+    }
+}
+
+class Breed extends Animal {
+    constructor(species, breed){
+        super(species)
+        this.breed = breed
+    }
+}
+
+const myAnimal = new Animal('dog')
+console.log(myAnimal)
+
+const myDog = new Breed ('dog','staffy')
+console.log(myDog)
+```
