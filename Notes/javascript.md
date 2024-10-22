@@ -1515,9 +1515,71 @@ Pranav
 With a function we can define a function further down the document and access it near the top, however with a class you can only instantiate the class after the class has already been defined above. You must keep the order in mind.
 
 ## Asynchronous Programming
+Until now we have learned about Synchronous programming, which is code that is executed sequentially, in a set order line after line. However, there is also something known as Asynchronous programming that cannot be executed within the same sequential order as everything else.
 
+Think of sequential tasks in one column and asynchronous tasks in a separate column, if we try to integrate the two it can be problematic, which is why we use new promises and async/wait to utilise asynchronous code.
 
+### Promise
+Promise is something that can be used to store information within asynchronous code. It is a 'promise of information' for any function wanting to use it in the future. For example if we made an invite function to send out wedding invites, we can use a promise within there so that the catering function can call upon the results or "promised information" of the invite function (whether it is a yes or a no) and execute its own code with the correct number of guests in attendance.
 
+If a promise is still unresolved or unfulfilled, it will show up as undefined or pending still. Any reference to the promise within the code will be jumped over until the promise is fulfilled. 
 
+### Asnyc/await
+We can make a function operate in the correct order within the code, without being skipped over by using async/await. Async/await functions will ensure that the line of code which has the await will be executed without runtime jumping over it (even when there is no promise fulfillment yet). Heres an example below:
+```
+const sleep = ms => new Promise(r=> setTimeout(r,ms));
 
+async function run() {
+    console.log('Start Code')
+    const sleepStatus = await sleep(2000) 
+    console.log(sleepStatus)
+    console.log('Finished Code')
+}
 
+run()
+```
+The console log shows Start Code, then waits 2 seconds, prints undefined (since sleep doesn't point to anything), and then Finished Code afterwards.
+
+### Fetch API
+Fetch API is basically a way to get data from a backend server that holds data, which can then be manipulated/utilised within your program. This is crucial to full stack development, because you must fetch data from the back end. Fetching represents a promise of information, and as such you must handly it with asynchronous code. Fetch is an http request - get data from website.
+
+#### Try-catch API requests
+An important item to note is that promises can go wrong, fetching data can go wrong, so if we do that, it should be within a try-catch block to protect the rest of the code from breaking. Heres an example below:
+```
+const sleep = ms => new Promise(r=> setTimeout(r,ms));
+
+async function fetchData() {
+    try{
+        const res = await fetch ('https://dummyjson.com/products/1')
+        const data = await res.json()
+        console.log(data)
+    } catch(err) {
+        console.log(err.message)
+    }
+}
+
+fetchData()
+```
+
+#### Res
+We need to define a variable called res, which is basically the response of our data fetching request. We assign a fetch function with a destination to this variable. See the example below:
+```
+const res = await fetch ('https://the-one-api.dev/v2/book')
+const data = await res.json()
+```
+This allows us to fetch the data, we can then access the json data within the response by invoking the method operator .json() as shown below to assign it to a separate variable. Note: We also need to use await for the res.json() because it is part of a GET request, so it may take time and we dont want the runtime to skip over it.
+
+#### Post
+If we want to post information, this is far more complex. Need more information or look at javascript example functions.
+
+## Modern ES6+ JavaScript Syntax
+This section includes all the updated syntax and methods of programming using JavaScript that will make your life much simpler and make using JavaScript much more pleasant.
+
+### Arrow functions
+Arrow functions provide a quicker syntax for writing functions in JavaScript. The simplest syntax for an arrow function would be:
+```
+(input) => {} //Any code/logic goes within the curly parentheses.
+```
+The particular example above would be known as an 'anonymous' function - it does not have a name.
+
+### JavaScript Modules and Import/Export
