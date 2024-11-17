@@ -1580,6 +1580,65 @@ Arrow functions provide a quicker syntax for writing functions in JavaScript. Th
 ```
 (input) => {} //Any code/logic goes within the curly parentheses.
 ```
-The particular example above would be known as an 'anonymous' function - it does not have a name.
+The particular example above would be known as an 'anonymous' function - it does not have a name. Now, if we wanted to assign a name to our function, we would define it as a variable as shown below:
+```
+const myFunction = (input) => {
+    console.log('Executed function')
+}
+```
+This is the complete syntax for an arrow function, and it is just a modern version of the old school function.
+
+### Ternary Operator ?
+A ternary operator is a one line if-else block. It works exactly the same as a normal if else block that we learned about before, however condensed all into one line with the new syntax as shown below.
+```
+let friends = ['janie', 'lucy', 'gregothy']
+let isJaniceFriend = friends.includes('janice') ? true : false
+console.log(isJaniceFriend)
+```
+The true response comes after the ? and the false response comes after the colon. If we run the code above the log will show "false" because the name is misspelled in the array as 'janie'. If it were spelled correctly the console would return 'true'.
+
+### Optional Chaining
+Optional chaining can be quite useful, especially when dealing with nested dictionaries. Normally, we would see a nested dictionary as shown with the code below:
+```
+const yash = {
+    hobbies: {
+        muaythai: {
+            pairs_of_shorts: 2
+        }
+    }
+}
+
+console.log(yash.hobbies.gym.singlets)
+```
+In this example however, we are trying to console log a key-value pair within a property that does not exist - gym does not exist, neither does singlets. This is resulting in the code breaking in the runtime if we try to run this. Instead however, if we put the question mark after each "level" as shown below, then it will just return 'undefined' in the console without breaking the code. See the below example:
+```
+console.log(yash?.hobbies?.gym?.singlets)
+```
+
+This also works for square bracket syntax, as shown below:
+```
+console.log(yash?.['hobbies']?.gym?.singlets)
+```
+
+### Object Destructuring
+We can destructure an object within one line to pull out and define the properties within an object as variables, so that they can be utilised. Rather than the traditional mathod of let person.name = name, we can use this method instead to be quick. See the example below:
+```
+let person = {
+    name: 'Yash',
+    age: 27
+}
+
+const {name, age} = person
+console.log(name, age)
+```
+This will return Yash 27 in the console. 
+
+#### Reassigning variable names within an object
+Take the example given just above, the first key-value pair is the name. We can rename this variable within the syntax shown above with a semicolon after the object destructuring into a variable. See the example below:
+```
+const {name : person_name, age} = person
+console.log(person_name)
+```
+This pulls out the key value pair as a variable and renames the variable to whatever is after the semi-colon. So if we console.log(person_name) then it will return 'Yash'.
 
 ### JavaScript Modules and Import/Export
