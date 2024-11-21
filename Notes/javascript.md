@@ -1340,6 +1340,7 @@ This would change the text inside main-title to "Welcome to the DOM World"
 
 ## Modern OOP with classes, constructors and inheritance
 This is a system that is built around classes and objects. In JavaScript a class is a template for creating an object. Some of the objects might have a key-value pair like a name and an age. Now if we want to create a skeleton or a template for creating that person in the future, we can use classes.
+
 ### Defining and instantiating classes
 Lets say that we started off with an object with a key-value pair in it relating to a person such as below:
 ```
@@ -1640,5 +1641,44 @@ const {name : person_name, age} = person
 console.log(person_name)
 ```
 This pulls out the key value pair as a variable and renames the variable to whatever is after the semi-colon. So if we console.log(person_name) then it will return 'Yash'.
+
+#### Array Destructuring
+We can also destructure an array in the same way we would with an object. Rather than individually extracting values, we can just assign each value a variable name essentially within 1 line as shown below.
+```
+let oldArray = [4,5]
+
+let [value1, value2] = oldArray
+
+console.log(value1)
+```
+The console would return 4 as value1 has been assigned to oldArray[0].
+
+#### Template literal string
+Originally if we wan'ted to string together a bunch of text and numbers into one string, we'd use string concatenation and a bunch of other functions to put it together. However, with the ` back tick syntax we can do a few different things, one of which is that we can have the string over multiple lines (like a function), where the normal syntax doesn't work that way.
+
+Secondly, we can enter variables and values directly into the string by using the ${} syntax to convert the variables to string format. See the example below:
+```
+let my_name = 'yash'
+
+console.log(`hello my name is ${my_name} and i like the fraction 3/8 which has a decimal value of ${3/8}`)
+```
+
+This returns a whole string in the console:
+"hello my name is yash and i like the fraction 3/8 which has a decimal value of 0.375".
+
+#### Short Circuits && and ||
+Previously we learned that && and || are syntax for and or within boolean logic, however with the updated version of JavaScript, they have additional functionality. We can use them when we want to check something is true first and then do an action.
+
+For example we can use && to see if there is a key within a dictionary, and if there is, assign the value of the key-value pair to something else. See the example below:
+
+```
+let person_dict = {name: 'jon'}
+
+let person_name_2 = person_dict.name && 'jonny'
+
+console.log(person_name_2)
+```
+The console would return 'jonny' as the value in the dictionary person_dict has been updated from 'jon' to 'jonny'.
+
 
 ### JavaScript Modules and Import/Export
