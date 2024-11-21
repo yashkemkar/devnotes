@@ -1642,7 +1642,7 @@ console.log(person_name)
 ```
 This pulls out the key value pair as a variable and renames the variable to whatever is after the semi-colon. So if we console.log(person_name) then it will return 'Yash'.
 
-#### Array Destructuring
+### Array Destructuring
 We can also destructure an array in the same way we would with an object. Rather than individually extracting values, we can just assign each value a variable name essentially within 1 line as shown below.
 ```
 let oldArray = [4,5]
@@ -1653,7 +1653,7 @@ console.log(value1)
 ```
 The console would return 4 as value1 has been assigned to oldArray[0].
 
-#### Template literal string
+### Template literal string
 Originally if we wan'ted to string together a bunch of text and numbers into one string, we'd use string concatenation and a bunch of other functions to put it together. However, with the ` back tick syntax we can do a few different things, one of which is that we can have the string over multiple lines (like a function), where the normal syntax doesn't work that way.
 
 Secondly, we can enter variables and values directly into the string by using the ${} syntax to convert the variables to string format. See the example below:
@@ -1666,10 +1666,10 @@ console.log(`hello my name is ${my_name} and i like the fraction 3/8 which has a
 This returns a whole string in the console:
 "hello my name is yash and i like the fraction 3/8 which has a decimal value of 0.375".
 
-#### Short Circuits && and ||
-Previously we learned that && and || are syntax for and or within boolean logic, however with the updated version of JavaScript, they have additional functionality. We can use them when we want to check something is true first and then do an action.
+### Short Circuits && and ||
+Previously we learned that && and || are syntax for and or within boolean logic, however with the updated version of JavaScript, they have additional functionality. We can use them when we want to check something is true first and then do an action. What the && does is turn the first statement into a conditional statement, which if true, executes the second statement.
 
-For example we can use && to see if there is a key within a dictionary, and if there is, assign the value of the key-value pair to something else. See the example below:
+It is similar to the ternary operator, however the ternary operator just outputs true/false, this would execute the argument if the the first conditional statement is true. If it was false, instead of returning false like the ternary operator, it just returns undefined. See the example below:
 
 ```
 let person_dict = {name: 'jon'}
@@ -1678,7 +1678,204 @@ let person_name_2 = person_dict.name && 'jonny'
 
 console.log(person_name_2)
 ```
-The console would return 'jonny' as the value in the dictionary person_dict has been updated from 'jon' to 'jonny'.
+The console would return 'jonny' as the value of person_name_2 as the conditional statement was true.
 
+We can also use the || in an OR type conditional statement. It works in a similar way to above - it checks if the conditional statement is true. If it is, then it will assign that value to the variable, if its false then it will assign the second value instead of just returning undefined. See example below:
+```
+let person_dict = {name: 'jon'}
 
-### JavaScript Modules and Import/Export
+let person_name_3 = person_dict.name || 'default name'
+
+console.log(person_name_3)
+```
+The console would return 'jon' as the value of person_name_3 as the conditional statement was true.
+
+These are great to use when you don't know if something exists but you wan't to assign a value, or else provide a backup value.
+
+### Enhanced Object Literals
+We can use enhanced object literals syntax to speed up the process of creating objects containing key-value pairs using previously defined variables. The use case sounds more complex than it really is - if we already had pre-defined variables and want to create an object quickly we would use this. With this new script, JavaScript is going to say that 'we don't even have a value to assign' so it will assume that the inputs are variable names, and assign the variable name and value to the key-value entry within the dictionary/object. See the example below:
+```
+let fighter = 'jon jones'
+let ranking = 'P4P #1'
+
+const dana_white_glazing = {
+    fighter,
+    ranking
+}
+
+console.log(dana_white_glazing)
+```
+If we run the code, the console would return {fighter:'jon jones', ranking:'p4p #1'} without us having to input the whole object manually. This can be very handy if you want to collate data points into an object.
+
+### Spread Operator ...
+This is an incredibly useful syntax that can be used for both dictionaries and arrays. Rather than typing out an existing array entirely and then joining together with other value into a whole new array, I can just input it into a whole new array with the spread operator. How it works is that it 'spreads out' (seperates) all of the values within the array or dictionary,fter which we can add our own additional values/entries, and then it all gets put into a new array/object. See the example below for an array
+```
+let demo_array = [1,2,3,4,5]
+let demo_array2 = [...demo_array, 6, 7, 8]
+
+console.log(demo_array2)
+```
+
+This would return the array [1,2,3,4,5,6,7,8] without us having to right it out again. It works the same for dictionaries, see the example below:
+
+```
+let dana_white_glazing = {
+    favourite_fighter: 'jon jones'
+}
+
+let dana_white_glazing_max = {
+    ...dana_white_glazing,
+    ranking:'P4P #1'
+}
+
+console.log(dana_white_glazing_max)
+```
+The console would return { favourite_fighter: 'jon jones', ranking: 'P4P #1' }. You could even do iterations of these to add to existing dictionaries sequentially. See the code below:
+```
+let dana_white_glazing = {
+    favourite_fighter: 'jon jones'
+}
+
+let dana_white_glazing_max = {
+    ...dana_white_glazing,
+    ranking:'P4P #1'
+}
+
+let dana_white_glazing_max_plus = {
+    ...dana_white_glazing_max,
+    status: 'undefeated'
+}
+
+console.log(dana_white_glazing_max_plus)
+```
+This would return the following:
+{
+  favourite_fighter: 'jon jones',
+  ranking: 'P4P #1',
+  status: 'undefeated'
+}
+
+Another use case that we had very early on is to duplicate an object or an array. We created conditional loops where the code ran through each index of the dictionary or array and duplicated it into a new one. This is incredibly slow and inefficient. Instead we can just create a new object or array with the spread operator as shown below (this code continues on from the one above):
+```
+let who_is_the_goat = {
+    ...dana_white_glazing_max_plus
+}
+
+console.log(who_is_the_goat)
+```
+
+This would return the following:
+{
+  favourite_fighter: 'jon jones',
+  ranking: 'P4P #1',
+  status: 'undefeated'
+}
+
+This is waaaaaaaay quicker!
+
+### Array Methods
+We previously had learned about methods like pop, slice, includes, etc that can be applied to arrays and had to take arguments with a function input in the brackets. What we are learning now is similar to that, however it will be using the arrow function syntax and will be very useful for running through logic in loops for arrays. Most of these methods will be of a similar nature.
+
+#### forEach
+Previously we might have used some code like below to loop through an array and execute a function:
+```
+let my_cool_array = [3, 5, 12, 425, 54, 3, 7, 4, 5, 67, 4, 7]
+let length = my_cool_array.length
+
+for (i=0; i<length; i++) {
+    let current_value = my_cool_array[i]
+    console.log(current_value)
+}
+```
+And the console would return all the values individually in a line. However a loop is slow and tiring to write - we can just use a method like forEach to run the array through each value. And within the curly parentheses we would input anything as we would for the function in a for loop. See the example below:
+```
+let my_cool_array = [3, 5, 12, 425, 54, 3, 7, 4, 5, 67, 4, 7]
+
+my_cool_array.forEach((current_value, current_index)=> {
+    console.log(`The current value is: ${current_value} and the current index is: ${current_index}` )
+})
+```
+The console would return The current value is: 3 and the current index is: 0
+The current value is: 5 and the current index is: 1... and so on all the way through the array.
+
+#### map
+Map is very similar to forEach except its not for console.log to be used within the function part, its designed to return a value for each iteration of the loop. So it can be used to manipulate the values within an existing array and placing the new values within a new array. Whatever gets returned within the map of the original array gets inserted into a new array at the same index as a modified value of the original. See the example below:
+```
+
+let my_cool_array = [3, 5, 12, 425, 54, 3, 7, 4, 5, 67, 4, 7]
+
+let my_new_array = my_cool_array.map((current_value, current_index)=> {
+    return current_value*2
+})
+
+console.log(my_new_array)
+```
+This returns the new array as [6, 10, 24, 850, 108, 6, 14,  8,  10, 134, 8, 14] and does not modify the original array.
+
+### filter
+We had already learned a way to filter out values in an array earlier in the course, however this method is even easier. See the code below for an example of how to filter out even numbers:
+```
+let my_cool_array = [3, 5, 12, 425, 54, 3, 7, 4, 5, 67, 4, 7]
+
+let filtered_array = my_cool_array.filter((current_value, curr_index) =>{
+    let is_even = current_value % 2 === 0
+    return !is_even
+})
+
+console.log(filtered_array)
+```
+The above would return into the console [3, 5, 425, 3, 7, 5, 67, 7]. Note that the ! inverts whats behind it. So, is_even was returning the values that were true, however inverting all the true/false responses results in the odd numbers being "true" (!false), hence the odd numbers got returned into our array. We could also very easily remove the ! and just change the remainder function to be === 1.
+
+### reduce
+Reduce as a method is very similar, but it is the most complex - you could say it does all of the above ones in one method. It differs from the ones above in that it actually has 3 inputs - an accumulator, current value and current index. Additionally, after the curly parentheses function part, we present a second argument to our reduce function - the starting or entry value. We would parse in the structure of whatever we want the final out put to be. See the example below:
+```
+let my_cool_array = [3, 5, 12, 425, 54, 3, 7, 4, 5, 67, 4, 7]
+
+let reduced_array = my_cool_array.reduce((accumulator, current_value, current_index) => {
+    return accumulator + `,${current_value}:${current_index}`
+}, '')
+
+console.log(reduced_array)
+```
+The above code returns ",3:0,5:1,12:2,425:3,54:4,3:5,7:6,4:7,5:8,67:9,4:10,7:11" in the console. 
+The accumulator is like a running collection of the results of each iteration - so prior to the first iteration the accumulator is just the comma (in the example below), then it takes the result of the first iteration and slaps that on the end - this is now the new accumulator. The second iteration uses the new accumulator and slaps on the result to that, which then becomes the new accumulator. This way the iterations build the string.
+
+To visualise what it is doing, we can insert a console.log into the loop function to visually describe how the function is moving through the indices and how that changes the accumulator:
+```
+let reduced_array = my_cool_array.reduce((accumulator, current_value, current_index) => {
+    console.log(`ACCUMULATOR: ${accumulator}\nCURRENT_VALUE: ${current_value}\nCURRENT_INDEX: ${current_index}`)
+    return accumulator + `,${current_value}:${current_index}`
+}, '')
+
+console.log(reduced_array)
+```
+This would return the following into the console:
+ACCUMULATOR: 
+CURRENT_VALUE: 3
+CURRENT_INDEX: 0
+ACCUMULATOR: ,3:0
+CURRENT_VALUE: 5
+CURRENT_INDEX: 1
+ACCUMULATOR: ,3:0,5:1
+CURRENT_VALUE: 12
+CURRENT_INDEX: 2
+ACCUMULATOR: ,3:0,5:1,12:2
+CURRENT_VALUE: 425
+CURRENT_INDEX: 3
+ACCUMULATOR: ,3:0,5:1,12:2,425:3
+CURRENT_VALUE: 54
+CURRENT_INDEX: 4
+ACCUMULATOR: ,3:0,5:1,12:2,425:3,54:4
+CURRENT_VALUE: 3
+CURRENT_INDEX: 5
+ACCUMULATOR: ,3:0,5:1,12:2,425:3,54:4,3:5
+
+## JavaScript Modules and Import/Export
+### Node Package Manager (npm)
+There is a whole ecosystem of node packages that we can use to facilitate and write extra cool code without having to write new code from the ground up. Now, the FetchAPI is an interesting example. Its actually new to JavaScript, and before that if you wanted to write code to send out networking requests and retrieve date you would often use an npm library.
+
+If you want to add external packages then you need a package.JSON file - a JSON is a form thats pretty similar to an object. Now, in the terminal, we need to initialise the file using the code below:
+```
+node init -y
+```
+This is going to create the package.JSON file in the root directory of our project. The key difference between objects in JavaScript and objects in JSON is that everything needs to be double quotation marks "", except for arrays and sub-objects.
