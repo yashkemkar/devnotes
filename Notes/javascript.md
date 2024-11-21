@@ -1542,7 +1542,7 @@ run()
 The console log shows Start Code, then waits 2 seconds, prints undefined (since sleep doesn't point to anything), and then Finished Code afterwards.
 
 ### Fetch API
-Fetch API is basically a way to get data from a backend server that holds data, which can then be manipulated/utilised within your program. This is crucial to full stack development, because you must fetch data from the back end. Fetching represents a promise of information, and as such you must handly it with asynchronous code. Fetch is an http request - get data from website.
+Fetch API is basically a way to get data from a backend server that holds data, which can then be manipulated/utilised within your program. This is crucial to full stack development, because you must fetch data from the back end. Fetching represents a promise of information, and as such you must handle it with asynchronous code. Fetch is an http request - get data from website.
 
 #### Try-catch API requests
 An important item to note is that promises can go wrong, fetching data can go wrong, so if we do that, it should be within a try-catch block to protect the rest of the code from breaking. Heres an example below:
@@ -1898,3 +1898,49 @@ Within this package file you can actually insert scripts to be executed, for exa
 }
 ```
 The console line is the only line I added to the original JSON, but if I then go to the terminal and type in 'npm run console' it will run the argument within the console - which is our chapter_7.js file. All the code within that file will get executed through the console.
+
+## Coding Best Practices & Algorithmic Programming (Theory)
+
+### Optimize JavaScript Code for better Performance and Effeciency
+
+#### Minimise DOM Manipulations
+Manipulating the DOM is when we use JavaScript to repaint our browser UI. We manipulate the object representation of our HTML document (animations and visuals and such of actual content), and that consequently makes our webpage look differently. While this process can be incredibly quick, its not necessarily the most performante.
+
+We want to minimise the number of these kind of operations  that we encounter. Of the operations that we do choose to complete, if they were unnecessary we could have the option of delaying them or batch numerous updates together to happen in the same instance.
+
+#### Efficient Event Listeners
+Event listeners are html tags that listen to a certain event and execute code when the event happens. Too many event listeners can cause problems in the code, so only assign event listeners where necessary and if some aren't being used, you can always remove them and reassign them when necessary. This is why we covered removing event listeners in the course.
+
+#### Optimise loops
+Loops, nested loops, layers of nested loops, can all create significant performance issues within code. The way to make them as efficient as possible is to remove any lines of code that could arguably be outside the loop, therefore it doesn't run x number of times, only once. Only necessary code should be within the loop, and that way we don't waste computational power repeating tasks unnecessarily.
+
+We can also 'break' or 'continue' between iterations where possible. If we can achieve the desired outcome of a loop early, or we realise that a particular iteration of the loop is not necessary, skip that loop or break out of it. It's going to save a lot of computational power.
+
+#### Choosing the Correct Data Structure
+Arrays - Listing entries of items for ordered collections
+Objects - Contains key-value pairs
+
+Each data structure has its own advantages, so one is typically going to be better than the other in each situation. Arrays are better when we only need to manage entries on a list, and only need to manage via an index, don't need to label everything. However, if we have a whole lot of information that we feel needs to be labeled - such as users in a database, then an object/dictionary would be very beneficial.
+
+#### Caching data
+Caching is an incredibly powerful technique that can be used to speed up the execution time of our application. How it works is that we avoid recalculating or recomputing expensive values that don't change very frequently. We do this via a process called memoisation.
+
+Lets say I had an array of numbers that I wanted to loop over and calculate the square of that number. Now if I had numbers that are repeated, it's inefficient to recalculate the square if its already been done before. What we can do is cache that value inside a dictionary (which have an incredibly fast lookup time). It's much quicker to look it up than to recalculate.
+
+#### Monitor Performance
+We can use the developer tools in our browser to monitor our performance, these tools allow us to use the console log, networking tab, and even lighthouse feature to determine performance of the application. This will help us determine bottlenecks in our application.
+
+#### Web API's & Libraries
+When we went through the promises and asynchronous programming part of this course we learned that networking requests can take an uncertain amount of time (this is known as latency). If we experience significant latency, this can negatively impact the performance of our webpages, which leads to a bad user experience. Web API performance should be monitored.
+
+Libraries are very useful for us and provide a significant range and depth of utility to us, without us having to program it ourselves. We already learned how to install these libraries using npm. However, despite their usefulness, we cannot really see how these effects or bits of code work (under the hood) so its a possibility that we pick the wrong ones. This will slow down the performance of your application in general. 
+
+Be conscious of the performance implications a library may have on your application. Sometimes you will have multiple libraries that can achieve the same outcome - the best answer will always be to use the most lightweight package to get the job done. This is the Rule of Least Power. Stick to it.
+
+### Apply Coding Best Practices - Write Clean and Maintanable Code
+
+
+### Big O Notation
+
+
+### Solving Algorithmic Programming Questions with JavaScript
