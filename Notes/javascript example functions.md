@@ -643,3 +643,139 @@ async function postUserData() {
 
 postUserData()
 ```
+
+## Set 6 - Modern ES6+ JavaScript Syntax
+1. How do you create a string that includes both static text and the value of the variable name, using template literals?
+```
+let name = 'gregothy'
+let special_string = `hello my name is ${name}`
+
+console.log(special_string)
+```
+
+2. Convert the following function into an arrow function syntax:
+```
+function add(a,b) {
+    return a + b;
+}
+```
+Here is the new code:
+```
+let add = (a, b) => { return a + b }
+console.log(add(2,3))
+```
+
+3. Given an object person with properties name and age, use object destructuring to create two variables name and age, extracing the values from the object.
+```
+const person = {
+    name: 'yash',
+    age: 27
+}
+
+const {name, age} = person
+console.log(name,age)
+```
+
+4. Given an array colours with the values ['red', 'green', 'blue'], use array destructuring to create three variables named first, second and third, assigning the first, second, and third elements of the array to them, respectively.
+```
+colour_array = ['red', 'green', 'blue']
+let [first, second, third] = colour_array
+
+console.log(first, second, third)
+```
+
+5. How do you create a new array combined that contains all the elements of array arr1 and arr2 using the spread operator?
+```
+arr1 = [1,2,3,4]
+arr2 = [5,6,7,8]
+
+let arr3=[...arr1,...arr2]
+console.log(arr3)
+```
+
+6. How do you create a new object combinedObject that merges the properties of two objects obj1 and obj2, with properties from obj2 overwriting those in obj1 if they exist in both objects?
+
+let obj1 = {name: 'henry', age: 14}
+let obj2 = {name: 'gregothy', colour: 'blue}
+let combined_obj = {
+    ...obj1,
+    ...obj2
+}
+
+console.log(combined_obj)
+```
+
+The second object is the one who's name remains, because the most recent value of the same key will remain.
+
+7. How do you safely access the street property address inside an object user that may not exist, using optional chaining?
+```
+const user = {name:'yash'}
+console.log(user?.address?.street)
+```
+
+8. Define a function greet(name, greeting = "hello") that takes a name and an optional greet. If the greeting is not provided it should default to "hello".
+```
+const greet = (name, greeting = 'Hello') => {
+    console.log(`${greeting} ${name}`)
+}
+greet('yash', 'ni hao')
+```
+
+9. Explain the differnce between let and const keywrods, and give an example of when you would use each.
+```
+let chosen_number = 4
+chosen_number = 83
+
+const my_name ='yash'
+```
+
+10. Write a for...of loop that iterates over an array numbers and logs each number to the console. Below are two simple ways of doing it.
+```
+let new_array = [1,2,3,4]
+new_array.forEach((current_value, current_index) => {
+    console.log(current_value)
+})
+
+for (let current_value of new_array) {
+    console.log(current_value)
+}
+```
+
+11. Given an array of numbers, use the map method to create a new array with each number squared.
+```
+let new_array = [1,2,3,4]
+
+let updated_array = new_array.map((current_value, current_index) => {
+    return current_value*current_value
+})
+
+console.log(updated_array)
+```
+
+12. How would you use the ternary operator to assign "adult" to a variable ageStatus if age is 18 or over, and "minor" if under 18?
+
+```
+let age = 14
+let ageStatus = age.valueOf()>18 ? 'Adult':'Minor'
+console.log(ageStatus)
+```
+
+13. How do you use the logical AND operator to execute a function logMessage() only if the variable is LoggedIn is true?
+```
+const logMessage = () => {console.log('logged in')}
+
+let isLoggedIn = true
+
+isLoggedIn && logMessage()
+```
+
+14. How can you use the logical OR operator to assign a default value of "guest" to a variable username if the current user.name is defined or null?
+```
+let user = {
+    name: 'banana muffin'
+}
+
+let username = user.name || 'guest'
+
+console.log(username)
+```
