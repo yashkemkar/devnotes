@@ -1879,3 +1879,22 @@ If you want to add external packages then you need a package.JSON file - a JSON 
 node init -y
 ```
 This is going to create the package.JSON file in the root directory of our project. The key difference between objects in JavaScript and objects in JSON is that everything needs to be double quotation marks "", except for arrays and sub-objects.
+
+### package.JSON
+Within this package file you can actually insert scripts to be executed, for example, you could console something like shown below:
+```
+{
+  "name": "the-complete-javascript-course",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "console": "node notes/chapter_7.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
+```
+The console line is the only line I added to the original JSON, but if I then go to the terminal and type in 'npm run console' it will run the argument within the console - which is our chapter_7.js file. All the code within that file will get executed through the console.
