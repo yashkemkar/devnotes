@@ -54,9 +54,9 @@ Attributes must go inside the opening tag always.
 ```<img src=”link here” alt=”picture-description-here”/>```
  - This is an image tag with a source reference, the tag is self closing and must have src and alt attributes.
 
-```<a  href=”link here” target=”_blank”>```
-    ```<p>Insert link and text here</p>```
-```</a>```
+```<a  href=”link here” target=”_blank”>
+    <p>Insert link and text here</p>
+</a>```
 
 This is an anchor text tag it will contain text with a link as an attribute (inside the opening tag). Another attribute can be entered in there called target=”_blank” which makes the link open in a new tab.
 
