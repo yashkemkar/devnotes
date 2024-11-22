@@ -44,52 +44,59 @@ Even the html document is opened with a <html> and closed with a </html> to sign
 ## Syntax
 This entire section will just be an example of a tag or type of syntax and an explanation:
 
-```<p>Text goes in here</p>```
-This is a paragraph tag (text must always be in a paragraph tag).
+### Paragraph
+<p>Text goes in here</p>
+This is a paragraph tag (text must always be in a paragraph tag)
 
-```<h1> Header 1 goes in here </h1>```
-This is a header tag of the largest size - goes from h1 to h6.
+### Header
+<h1> Header 1 goes in here </h1>
+This is a header tag of the largest size - goes from h1 to h6
 
+### Attributes
 Attributes must go inside the opening tag always.
-```<img src=”link here” alt=”picture-description-here”/>```
+<img src=”link here” alt=”picture-description-here”/>
  - This is an image tag with a source reference, the tag is self closing and must have src and alt attributes.
 
-```<a  href=”link here” target=”_blank”>
+### Anchor text (Hyperlink)
+<a  href=”link here” target=”_blank”>
     <p>Insert link and text here</p>
-</a>```
-
+</a>
 This is an anchor text tag it will contain text with a link as an attribute (inside the opening tag). Another attribute can be entered in there called target=”_blank” which makes the link open in a new tab.
 
+### Label
 <label>
     <p>Favourite dog breed</p>
     <input placeholder= ”Write text here instruction” />
 </label>
-
-
 The input tag creates a text box which prompts the user to type according to the instruction in the box.The label tag allows the input tag to have a name/heading.
 
+### Button
 <button>
     <p>submit</p>
 </button>
 This creates a button with submit written in there. Click to submit, etc.
 
+### Div
 <div>
     Whatever code you want goes in here as a containerised item.
 </div>
 This is a container tag - it contains the elements within it into one container.
 
+### Form
 <form>
     <label><p>Whatever your label is</p></label>
     <button>Submit</button>
 </form>
 Can put the label and button (all form related tags) inside this form tag to make the code cleaner and give it semantic meaning within the whole code.
 
+### Section
 <section>
     Another type of container to break up your webpage
 </section>
 This is similar to a page break and is a type of a container.
+**We want to containerise as many similar items together as is possible.**
 
-We want to containerise as many similar items together as is possible.
+### Document starter code
 ! - In visualbasic entering !!! will add the standard boilerplate code for every single html file you write. See the code below:
 <!DOCTYPE html>
 <html lang="en">
@@ -105,41 +112,42 @@ We want to containerise as many similar items together as is possible.
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-
-
 The meta tag represents all the information about the file thats not visible (font, size, etc)
 The body tag is the part of the page that is visible to the viewer.
 
+### Title
 <title> Webpage Title </title>
 This changes the text that shows up as the webpage title in the tab.
 
+### Page Sections
 A page can be split up into 3 sections:
 <header> h1 tags, navigation tags, search bars, links </header>
 <main> main chunk of the webpage goes in here </main>
 <footer> links, disclaimer, email registration, etc </footer>
 
-
+### Navigation Tag
 <nav class="nav-container nav-container-second">
             <a class="text-link"
                 target="_blank" 
 href="https://www.gmail.com/"><p>Gmail</p></a>
 </nav>
-
-
 This navigation tag can have an anchor tag in there to link the text in the paragraph tag to an internal link within the website or an external link.
 
+### Image
 <img style="width:50%"/>
 You can add a style attribute inside the image tag to generate a responsive design. This is CSS - the style function is CSS used to make the website look good. The format is 
 
 style=”item: value; item2: value2;” - and this is an attribute inside any type of tag - it just gives a look to the main content. This is an in-line CSS element - not the ideal way to style.
 
+### ID
 <div id = "first-div">
 You can assign an id or a name to any specific/individual element by entering it as an attribute to make it easier to refer to with CSS.
 
+### Class
 <div class="first-class second-class"></div>
 You can assign multiple containers or elements to have the same styling by putting them all in the same class, and then styling the class in CSS. You can also assign them multiple classes by entering the second, third, etc class in a new line. The code above has classed the division as “first-class” and as “second-class”, classes are separated by a space.
 
-
+### CSS inside HTML Head
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -149,18 +157,23 @@ You can assign multiple containers or elements to have the same styling by putti
 </head>
 You can also refer to a CSS sheet within your HTML text to cleanly set up your code into separate files. Above is an example of referring to the CSS file in the head section as it refers to style elements for the whole website.
 
+### Link
 <link rel=stylesheet”
 href=”sheet-name.css” /> - This is how you pull the style sheet into your HTML
 
+### Icon
 <i class="fa-solid fa-magnifying-glass"></i>
 This is an icon tag. You have to load the library into the head section of your html first.
 
+### Input
 <input title="Search"/>
 This is an attribute to give a title to anything you hover over in html. So if a text field is hovered over, it may show a title.
 
- <div class="footer-grid"><!--Enter comments into your code-->
+### Comments
+<div class="footer-grid"><!--Enter comments into your code-->
 You should enter comments in your code wherever you have made a structural/aesthetic decision that is not immediately obvious, or which you had to plan out how to go about coding it. Explains your thought process
 
+### Horizontal Line
 <hr>
 This is a self-closing tag that creates a horizontal line. 
 
@@ -172,6 +185,31 @@ hr {
 }
 This is CSS code just specific to the horizontal break point.
 
+### Span Selector Tag
 <a href="/" target= "_blank" class="project-archive-link"><p>View Full Project Archive <span>&rarr;</span>;</p></a>
 Span is a selector similar to div that is used when selecting very small things. For example you might use it when sub-selecting text or adding a special element to a small amount of text.
 &rarr; is a special keycode to get an arrow. There are many special character key codes, look them up one day to know what symbols are available.
+
+
+## Containerisation/Flexbox
+The biggest thing about HTML programming is to build anything utilising the principle of containerisation. Like we learned above, there are certain tags we can use such as id and class that can assign a name or categorisation to a particular element or section. This way we can create a flexible box display that can be manipulated for aesthetics when designing a website. Containerisation is also very important for responsivity, say you had project cards or experience cards - you need them to be in their own flexboxes so that they can move around for different screen sizes.
+
+Essentially you will be containerising everything you work on. And the best way to design a website's visual aspects is to first draw out what you think the page might look like. Then take every single section and write out a container for it - you may have 4-10 different containers like the example below. This will then form the structure for your general code and will help you build and maintain clean, structured code. Check the example below for a portfolio website:
+<head>...</head>
+<body>
+    <header>...</header>
+    <main>
+        <section id="about">
+            <div id="social-links-container">...</div>
+        </section>
+        <section id="experience">
+            <div id="experience-card">...</div>
+        </section>
+        <section id="projects">
+            <div id="experience-card">...</div>
+        </section>
+    </main>
+    <footer>...</footer>
+</body>
+
+You can then break down each section further into multiple divs to design that cleanly, and even within div's have more. Essentially the goal is to be efficient with code and class as many things together as you can for the same code/design, however still maintaining the aesthetics and functionality of responsive design.
