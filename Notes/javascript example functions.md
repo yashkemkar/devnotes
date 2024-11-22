@@ -694,7 +694,7 @@ console.log(arr3)
 ```
 
 6. How do you create a new object combinedObject that merges the properties of two objects obj1 and obj2, with properties from obj2 overwriting those in obj1 if they exist in both objects?
-
+```
 let obj1 = {name: 'henry', age: 14}
 let obj2 = {name: 'gregothy', colour: 'blue}
 let combined_obj = {
@@ -778,4 +778,134 @@ let user = {
 let username = user.name || 'guest'
 
 console.log(username)
+```
+
+## Set 8 - Algorithmic Programming Questions
+1. Unique Characters in a String
+Question: Write a function to determine if a string has all unique characters. Return true if all characters are unique, and false otherwis. Assume the string only contains lowercase letters.
+
+```
+let string_1 = 'helloworldmynameisyashandilikeicecream' // should have repetitions
+let string_2 = 'thequickbrownfoxjumpsoverthelazydog' //definitely has repetitions
+let string_3 = 'abcdefghijk' //cannot have repitition
+
+// Need to create a function that checks if the character in the string is unique
+function isUnique(str) {
+    // Create an empty dictionary that will record when a character shows up uniquely.
+    let count_dict = {} 
+    // Now loop through the string to assess each character individually. 
+    for (let i = 0; i < str.length; i++) {
+        let current_char = str[i]
+        // Conditional heck if the current character is present in the dictionary - if it is present, its not unique - return false and the code stops there (this is the break that we were talking about for efficiency - no need to execute the code further).
+        if (current_char in count_dict) {
+            return false
+        }
+        // If it is unique, add the current character to count_dict.
+        count_dict[current_char] = 1
+    }
+    // The return true line is outside of the loop because you don't need it to return true for every instance that is unique - you just need to check all and give a true response once.
+    return true
+}
+
+console.log(isUnique(string_2))
+```
+
+2. Merge Sorted Arrays
+Question: Given two sorted arrays nums1 and nums2, write a function to merge them into a single, sorted array.
+
+```
+let string_arr_1 = ['a', 'b', 'c', 'd', 'e', 'f']
+let string_arr_2 = ['a', 'b', 'c', 'd', 'e', 'f']
+
+let arr_1 = [2,4,6]
+let arr_2 = [1,3,5]
+
+// Standard spread operator function and put back together + sort at the end.
+let merge_sort_function = (first_array, second_array) => {
+    let merged_array = [...first_array, ...second_array].sort()
+    // Putting return inside the function is more efficient - don't need to console.log it unless we specifically want to at some point. And if we do want to we can just console log the whole function.
+    return merged_array
+}
+console.log(merge_sort_function(string_arr_1, string_arr_2))
+```
+
+3. Find All Duplicates in an Array
+Question: Given an array of integers where 1 <= a[i] <= n (n = size of the array), some elements appear twice and others appear once. Write a function that returns an array of all the elements that appear twice in a given array. You must achieve this with O(n) time complexity and O(1) extra space complexity.
+
+```
+//Since we are only allowed O(n) time complexity we are only allowed a single loop.
+let dummy_arr = [1, 4, 1, 2, 3, 4, 6, 5]
+
+let findAllDuplicates = (nums) => {
+    let duplicates = []
+    let count_dict= {}
+    // Use a count dictionary with this simple for loop to check if that value is in the count dictionary, if it is, then push it to the duplicates array. If not, then create a key-value pair in the count_dict where the key is the number and the value is 1. This way it shows up only once in the dictionary, and additional repetitions get pushed to a new array called duplicates.
+    for (let current_value of nums){
+        if (current_value in count_dict) {
+            duplicates.push(current_value)
+        } else {
+            count_dict[current_value] = 1
+        }
+    }
+    return duplicates
+}
+console.log(findAllDuplicates(dummy_arr))
+```
+
+4. Rotate Array
+Question: Rotate an array to the right by k steps, where k is non-negative. Modify the input array in-place with O(1) extra space.
+
+```
+let start_array = [1, 2, 3, 4, 5, 6]
+
+rotate_array = (nums, k) => {
+    let end_values = nums.slice(k)
+    let start_values = nums.slice(0,k)
+    
+    let new_array=[...end_values,...start_values]
+    return new_array
+}
+
+console.log(rotate_array(start_array, 3))
+```
+
+5. Valid Parentheses
+Question: Given a string s containing just the characters '(',')','{','}','[' and']', determine if the input string is valid. An input string is valid if:
+    - Open brackets must be closed by the same type of brackets.
+    - Open brackets must be closed in the correct order.
+
+```
+let s = '()[]{}'
+let s_2 = '())[{]{)}'
+
+function validParentheses(str) {
+    const combos = {
+        '{': '}',
+        '[': ']',
+        '(': ')',
+    }
+
+    let stack = []
+
+    for (let current_bracket of str) {
+        if (stack.length === 0) { //if theres nothing there in stack then push one
+            stack.push(current_bracket)
+        } else if (current_bracket in combos) { //opening bracket check
+            stack.push(current_bracket)
+        } else { //if we reach this stage it has to be a closing bracket
+            let last_value_on_stack = stack[stack.length - 1]
+            if (!(last_value_on_stack in combos)) { //this checks if last value on the stack is NOT an opening bracket (but not yet if its the correct one)
+                stack.push(current_bracket)
+            } else {
+                if (combos[last_value_on_stack] === current_bracket) { //this checks if the last value is the same as what is currently there (essentially a repeat) then it pops it from the stack.
+                    stack.pop()
+                }
+            }
+        }
+    }
+
+    return stack.length === 0
+}
+
+console.log(validParentheses(s_2))
 ```

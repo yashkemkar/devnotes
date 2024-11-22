@@ -1939,8 +1939,62 @@ Be conscious of the performance implications a library may have on your applicat
 
 ### Apply Coding Best Practices - Write Clean and Maintanable Code
 
+#### Variable/Function Names
+Always make sure that your variable or function names are always appropriate for the task they are being used for. If anyone (including yourself in the future) reviews this code, they should be able to tell the purpose of this variable, how exactly it is utilised within your code, and why it has been included in there.
+
+The name should tell you about the intent of the code. It may be more efficient to write out single letter variable such as a, b, c, x, y, z, however they don't elaborate anything about the intent of the variable. Better to go with something such as calculateAreaOfCircle as a function name, or yashHeight as a variable name. It is pretty clear what both of those do without even seeing the code for them.
+
+Rule: Always be able to infer the meaning or purpose of the variable/function from the name.
+
+#### Function Purpose
+A function should only ever have one main purpose or utility. Functionality should always be broken down to the smallest task, such as a function that fetches user data, and a separate function that log user in, rather than one function that does both.
+
+If there is an issue in a function, if there is only one task per function, you can easily tell what is going wrong. 
+
+Rule: If the function name describes its utility and the name is getting too long, chances are that you need to split it up into smaller functions and chain them together.
+
+#### Comments
+You don't want to comment every bit of code, that could render comments kind of useless. But you also dont want to be so scarce that there is no explanation for your code. Rather somewhere in the middle - if there is a function that is complex, or you had to look up information to understand how it works, or go back to your notes - then put a comment in there. A comment in a function like that could be very helpful to anyone reviewing it. However, if its a function like areaOfARectangle - then this is self explanatory, does not need elaboration.
+
+You can use comments in a complex function to describe the steps that the function goes through and write the code specific to that step under it. This way anyone that reads the code can easily see the steps commented. It also makes it much easier to debug in the future.
+
+You can also use comments as a way to describe what you need to do at the start of the project, which will compartmentalise the processes required at the start rather than approaching it ad-hoc as you go. This will help you design a better system just with the comments. For example if you are building a website and you can visualise what needs to happen in your head - just write down all those small tasks you can think of as comments - and once you have refined it, this will provide the structure for your code.
+
+#### Avoid All Convoluted Statements
+If multiple conditional checks are required, do not put them into one lie of code and make them super convoluted. Far better to break it down into an if-else block. Not only will this appear far easier to understand, it will also compute more smoothly with far less likelihood of breaking your code.
+
+Rule: Break down conditional checks into the smallest format - check whether ONE condition is met.
 
 ### Big O Notation
+This is a system that allows us to describe the complexity of a task and how much time it takes. This is a notation where n refers to the input size, O refers to the operation and T refers to the time taken to complete the task. This can be visualised with a graph, however, I have ranked 4 different types of equations below in order of most time to least time:
+1. T = O(n^2)           (least efficient)
+2. T = O(n)
+3. T = O(log n)
+4. T = O(1)             (most efficient)
+
+An analogy for understanding the Big O notation could be washing plates. Now the input size is the number of dishes, if we were looking at T = O(n) we could see that 4 dishes would take 2x the amount of time to wash as 2 dishes would. Where as T = O(n^2) will not be 2x the amount of time, but instead will be 4x the amount of time (this is inefficient code). 
+
+Now a simple understanding of mathematics would tell us that the most performant style of code is code that can be characterised by the equation T = O(1). This shows that the time taken to complete the task is completely independent of the variable n (input size). This would be like if you could snap your fingers and have all the dishes in the sink washed, it didn't matter if there were 2, 4, or 15 - it would all happen in the same amount of time.
+
+#### (On^2) Operation - Nested For Loops
+Nested for loops are the least efficient type of code because they necessarily operate in an inefficient way. For each loop of the first loop, there is another loop within that must be run n times, and the first loop must also run n times. It is super inefficient. Consider the code below:
+```
+let arr = [1, 2, 3, 4, 5]
+
+for (let i = 0; i < arr.length; i++) {
+    let current_value = arr[i]
+    console.log(current_value)
+    for (j = 0; j < arr.length; j++) {
+        let current_value_2 = arr[j]
+        console.log(current_value, current_value_2)
+    }
+}
+```
+That could would produce 25 outputs. If we change the array to add a value of 6 at the end [1,2,3,4,5,6], now it would produce 36 outputs (not 26 as we would expect of a O(n) type operation). It is an exponentially difficult task.
+#### O(1) Operation - Dictionaries
+In JavaScript, looking up a value associated with a key in a dictionary is an O(1) level operation. It is extremely efficient. The context we talked about above - calculating the value of a squared number - rather than compute a value we have already seen, if we stored that to a dictionary then we could just look it up.
+
+This is the kind of code you want to set up.
 
 
 ### Solving Algorithmic Programming Questions with JavaScript
