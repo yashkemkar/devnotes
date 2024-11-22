@@ -1654,7 +1654,7 @@ console.log(value1)
 The console would return 4 as value1 has been assigned to oldArray[0].
 
 ### Template literal string
-Originally if we wan'ted to string together a bunch of text and numbers into one string, we'd use string concatenation and a bunch of other functions to put it together. However, with the ` back tick syntax we can do a few different things, one of which is that we can have the string over multiple lines (like a function), where the normal syntax doesn't work that way.
+Originally if we wanted to string together a bunch of text and numbers into one string, we'd use string concatenation and a bunch of other functions to put it together. However, with the ` back tick syntax we can do a few different things, one of which is that we can have the string over multiple lines (like a function), where the normal syntax doesn't work that way.
 
 Secondly, we can enter variables and values directly into the string by using the ${} syntax to convert the variables to string format. See the example below:
 ```
@@ -1991,10 +1991,11 @@ for (let i = 0; i < arr.length; i++) {
 }
 ```
 That could would produce 25 outputs. If we change the array to add a value of 6 at the end [1,2,3,4,5,6], now it would produce 36 outputs (not 26 as we would expect of a O(n) type operation). It is an exponentially difficult task.
+
 #### O(1) Operation - Dictionaries
 In JavaScript, looking up a value associated with a key in a dictionary is an O(1) level operation. It is extremely efficient. The context we talked about above - calculating the value of a squared number - rather than compute a value we have already seen, if we stored that to a dictionary then we could just look it up.
 
-This is the kind of code you want to set up.
+This is the kind of code you want to set up. You should always try to understand the time complexity of the code you are writing and if you are in a situation where time performance is an important factor, you should consider the O(1) type operations.
 
 
 ### Solving Algorithmic Programming Questions with JavaScript
