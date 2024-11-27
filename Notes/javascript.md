@@ -1997,5 +1997,23 @@ In JavaScript, looking up a value associated with a key in a dictionary is an O(
 
 This is the kind of code you want to set up. You should always try to understand the time complexity of the code you are writing and if you are in a situation where time performance is an important factor, you should consider the O(1) type operations.
 
+### Additional Notes
+#### toFixed Method
+You can set a variable to be a set number of decimal places by using the to.Fixed method on the number. For example, the code below shows how to set the answer for total to be 2 decimal places:
+```
+function totalAdd(sum_1, sum_2) {
+    let total = sum_1 + sum_2
+    return total.toFixed(2)
+}
+```
+The example above would return the value of total to two decimal places.
 
+### Backslash \
+We can utilise the backslash to break up between code and text. It can be used with the \n (within the string) to enter the following text onto a new line. See the example below:
+```
+function printOutput(){
+    let summary = `Initial Amount: ${initial_amount}\nMonthly Contribution: ${monthly_contribution}\nNumber of Years: ${number_of_years}\nInterest Rate: ${interest_rate}'
+}
+```
+This allows the new text (after the amount parsed in) to be entered onto a new line.
 ### Solving Algorithmic Programming Questions with JavaScript
