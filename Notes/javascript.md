@@ -2006,6 +2006,7 @@ In JavaScript, looking up a value associated with a key in a dictionary is an O(
 
 This is the kind of code you want to set up. You should always try to understand the time complexity of the code you are writing and if you are in a situation where time performance is an important factor, you should consider the O(1) type operations.
 
+OFFICIAL COURSE NOTES ENDED. PROJECT LEARNINGS BELOW.
 ### Additional Notes
 #### toFixed Method
 You can set a variable to be a set number of decimal places by using the to.Fixed method on the number. For example, the code below shows how to set the answer for total to be 2 decimal places:
@@ -2017,6 +2018,18 @@ function totalAdd(sum_1, sum_2) {
 ```
 The example above would return the value of total to two decimal places.
 
+### Prompt Function
+You can use the prompt function in JavaScript to get a user to input information required for your calculation as shown below:
+```
+    let initial_amount = prompt('What is your initial investment ($) ?')
+```
+This would show up as an entry box for them to input data into that can be assigned to a variable to be used within your functions. However, you will run into a problem in the conosle that says "prompt is not defined". This has a very simple fix.
+
+We need to initialise a package.JSON file, and then initialise an external library using npm within our project directory. So you change to the directory and use 'npm install prompt-sync'. Once thats done, you need to invoke prompt as a function at the top of your document using the code shown below:
+```
+const prompt = required('prompt-sync')()
+```
+This allows you to invoke the function every time prompt is used within other variables.
 
 
 ### Solving Algorithmic Programming Questions with JavaScript

@@ -9,6 +9,13 @@ node -v
 ```
 This should give you a standard version number for node.js.
 
+## Change directory
+Sometimes you will need to change directory, so the command to do that in powershell is cd followed by the continued path of the directory you want (past the one you are in). See the example below:
+```
+PS C:\Users\yashk\Documents\Github\the-complete-javascript-course> cd projects/compound_interest_calculator
+```
+I was in the complete JavaScript course folder, and I wanted to go deeper into the compound interest calculator folder to initialise an external library.
+
 ## npm
 npm is short for Node Packet Manager - this is typically for supplementary files that you add to your JavaScript code that are utilised within its execution. These files will have code and parameters set that are needed for your main script hence the term "packet". The node packet manager is a software that is utilised to incorporate these JSON files into your program.
 
@@ -38,3 +45,11 @@ Within this package file you can actually insert code within the "scripts" secti
     "console": "node notes/chapter_7.js"
 ```
 The console line is the only line I added to the original JSON, but if I then go to the terminal and type in 'npm run console' it will run the argument within the console - which is our chapter_7.js file. All the code within that file will get executed through the console.
+
+## Different packages
+### prompt-sync
+If you want to use prompts and the error is coming back as undefined. Utilise the following code:
+```
+npm install prompt-sync
+```
+This will initialise the prompt file.
