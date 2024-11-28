@@ -1666,6 +1666,15 @@ console.log(`hello my name is ${my_name} and i like the fraction 3/8 which has a
 This returns a whole string in the console:
 "hello my name is yash and i like the fraction 3/8 which has a decimal value of 0.375".
 
+#### Backslash \
+We can utilise the backslash to break up between code and text within the backtick operator. It can be used with the \n (within the string) to enter the following text onto a new line. See the example below:
+```
+function printOutput(){
+    let summary = `Initial Amount: ${initial_amount}\nMonthly Contribution: ${monthly_contribution}\nNumber of Years: ${number_of_years}\nInterest Rate: ${interest_rate}'
+}
+```
+This allows the new text (after the amount parsed in) to be entered onto a new line.
+
 ### Short Circuits && and ||
 Previously we learned that && and || are syntax for and or within boolean logic, however with the updated version of JavaScript, they have additional functionality. We can use them when we want to check something is true first and then do an action. What the && does is turn the first statement into a conditional statement, which if true, executes the second statement.
 
@@ -2008,12 +2017,6 @@ function totalAdd(sum_1, sum_2) {
 ```
 The example above would return the value of total to two decimal places.
 
-### Backslash \
-We can utilise the backslash to break up between code and text. It can be used with the \n (within the string) to enter the following text onto a new line. See the example below:
-```
-function printOutput(){
-    let summary = `Initial Amount: ${initial_amount}\nMonthly Contribution: ${monthly_contribution}\nNumber of Years: ${number_of_years}\nInterest Rate: ${interest_rate}'
-}
-```
-This allows the new text (after the amount parsed in) to be entered onto a new line.
+
+
 ### Solving Algorithmic Programming Questions with JavaScript
