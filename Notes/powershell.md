@@ -16,6 +16,9 @@ PS C:\Users\yashk\Documents\Github\the-complete-javascript-course> cd projects/c
 ```
 I was in the complete JavaScript course folder, and I wanted to go deeper into the compound interest calculator folder to initialise an external library.
 
+### Go up a folder 
+You can go up a folder by using the double period. It will take you up one folder from where you are currently in.
+
 ## npm
 npm is short for Node Packet Manager - this is typically for supplementary files that you add to your JavaScript code that are utilised within its execution. These files will have code and parameters set that are needed for your main script hence the term "packet". The node packet manager is a software that is utilised to incorporate these JSON files into your program.
 
