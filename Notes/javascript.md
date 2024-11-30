@@ -1908,6 +1908,17 @@ Within this package file you can actually insert scripts to be executed, for exa
 ```
 The console line is the only line I added to the original JSON, but if I then go to the terminal and type in 'npm run console' it will run the argument within the console - which is our chapter_7.js file. All the code within that file will get executed through the console.
 
+### Package Install
+Any packages installed will be seen within the dependencies in the package.JSON file.
+
+### Importing from Packages
+You can import variables, functions, methods, etc from packages installed within your project directory (and initialised) using the following code:
+```
+import { OpenAIApi, Configuration } from 'openai'
+import { createRequire } from 'module'
+```
+This syntax is different from your standard JavaScript as it is pulling from existing packages. Module is a default installation, so we don't have to install it.
+
 ## Coding Best Practices & Algorithmic Programming (Theory)
 
 ### Optimize JavaScript Code for better Performance and Effeciency
@@ -2007,6 +2018,7 @@ In JavaScript, looking up a value associated with a key in a dictionary is an O(
 This is the kind of code you want to set up. You should always try to understand the time complexity of the code you are writing and if you are in a situation where time performance is an important factor, you should consider the O(1) type operations.
 
 OFFICIAL COURSE NOTES ENDED. PROJECT LEARNINGS BELOW.
+
 ### Additional Notes
 #### toFixed Method
 You can set a variable to be a set number of decimal places by using the to.Fixed method on the number. For example, the code below shows how to set the answer for total to be 2 decimal places:
@@ -2017,6 +2029,9 @@ function totalAdd(sum_1, sum_2) {
 }
 ```
 The example above would return the value of total to two decimal places.
+
+## Project Configuration
+At the start of any project, you need to write down what exactly you will need or will need to do, and configure your project directory correctly by initialising the right files, and then configuring the right functions within your index file.
 
 ### Prompt Function
 You can use the prompt function in JavaScript to get a user to input information required for your calculation as shown below:
@@ -2031,5 +2046,18 @@ const prompt = required('prompt-sync')()
 ```
 This allows you to invoke the function every time prompt is used within other variables.
 
+### Create Require
+We can use the create require method by importing the old createRequire method from the 'module' package within our package.JSON file. This is a package thats installed by default, nothing required for us to do apart from change the JSON type to module. Then you create a constant named require, so that you can use it later:
+```
+const require = createRequire(import.meta.url)
+require('dotenv').config()
+```
+This now forces the code to require the package called .env, and then the config method allows us to access the environment's variables within our own code.
+
+### Accessing Environment Variables
+We can use the .env files to store information we need to access within our environment, but which we want to keep safe within our .env files such as API keys. We access the information within our index file to authenticate us with OpenAI while not revealing this information on our github. This is done with the process method as shown below:
+```
+const OPENAI_SECRET_KEY = process.env.OPENAI_SECRET_KEY
+```
 
 ### Solving Algorithmic Programming Questions with JavaScript
