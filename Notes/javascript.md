@@ -1570,6 +1570,12 @@ const data = await res.json()
 ```
 This allows us to fetch the data, we can then access the json data within the response by invoking the method operator .json() as shown below to assign it to a separate variable. Note: We also need to use await for the res.json() because it is part of a GET request, so it may take time and we dont want the runtime to skip over it.
 
+We can also fetch html data from a url using a similar process, however instead of json, we use text. See below:
+```
+const res = await fetch ('https://the-one-api.dev/v2/book')
+const data = await res.text()
+```
+
 #### Post
 If we want to post information, this is far more complex. Need more information or look at javascript example functions.
 
