@@ -190,6 +190,10 @@ This is CSS code just specific to the horizontal break point.
 Span is a selector similar to div that is used when selecting very small things. For example you might use it when sub-selecting text or adding a special element to a small amount of text.
 &rarr; is a special keycode to get an arrow. There are many special character key codes, look them up one day to know what symbols are available.
 
+### Abbreviation Tag
+<h1>Coffee Tracking for Coffee <abbr title ="An enthusiast or devotee">Fiends</abbr>!</h1>
+The abbreviation tag is used when you are going to add the title attribute
+
 
 ## Containerisation/Flexbox
 The biggest thing about HTML programming is to build anything utilising the principle of containerisation. Like we learned above, there are certain tags we can use such as id and class that can assign a name or categorisation to a particular element or section. This way we can create a flexible box display that can be manipulated for aesthetics when designing a website. Containerisation is also very important for responsivity, say you had project cards or experience cards - you need them to be in their own flexboxes so that they can move around for different screen sizes.

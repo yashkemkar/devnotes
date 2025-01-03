@@ -1077,6 +1077,9 @@ As you can see above, it still prints "code continued to execute" at the end, in
 
 Whenever you have some code that is temperamental at the best of times or you are fetching data from an external source and not sure about the validity of the date, or even if the response is going to be successfully met. If it is a risk point, a try-catch block can be a great contingency for your error handling.
 
+#### Try-catch-finally block
+A try-catch-finally block is just an extension of the normal try-catch block, except it has another piece of logic attached at the end to execute after catch.
+
 #### Debugging
 Debugging is a critical skill for a programmer, however debugging starts when you write the code. You should write the code with provisions in place to make it easier for debugging in the future. One such thing that can help is to add a console.log phrase in at the start of your try block so that you know where the code failed.
 ```
