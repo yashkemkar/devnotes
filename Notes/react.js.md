@@ -318,17 +318,17 @@ When we create a react application, its injected into the div with the id of "ro
 
 Note: We need to import ReactDom from 'react-dom' to get it to work. See the code below for the modal.jsx itself:
 ```
-import { Children } from 'react'
 import ReactDom from 'react-dom'
 
 // create modal with portal overlay function that has specifically just the modal content
+
 export default function Modal(){
     return ReactDom.createPortal( 
         // render contents of jsx page without injecting into div id='root'
         <div className='modal-container'>
             <button onClick={handleCloseModal} className = 'modal-underlay'/>
             <div className='modal-content'>
-                {Children}
+                {children}
             </div>
         </div>,
         // render modal inside div id='portal' to get outside main application
@@ -410,3 +410,33 @@ const [searchValue,setSearchValue] = useState('')
 ... // more code inside here
 <input value={searchValue} onchange={(e)=>{setSearchValue(e.target.value)}}/>
 ```
+
+## Full Stack Projects
+Typically for a full stack project you will need some other items as well to complete the back end functions. 
+
+### Firebase
+There are a million ways to do back end, but one of the most popular for developers is firebase. Firebase is a google PaaS (platform as a service) that does the whole database, authentication, maintenance, etc for you - you just need to configure it and install firebase into your web application. Firebase is free until a very large number of users on your app - so we can use it easily for projects. 
+
+To create a new project go onto the website and log in to your google account and just create a new project in firebase, andn then install firebase in your IDE. To install:
+```
+npm install firebase
+```
+
+Then you need to copy the Firebase code and put it into your firebase.js file. It will be pre-formatted with your keys in the file, however for security you need to put the keys into your .env and then read them from the .env by importing into your firebase.js file. For a VITE project, you need to change the actual key to be a protected key as shown below:
+```
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
+  authDomain: import.meta.env.VITE_FIREBASE_APIKEY,
+  projectId: import.meta.env.VITE_FIREBASE_APIKEY,
+  storageBucket: import.meta.env.VITE_FIREBASE_APIKEY,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_APIKEY,
+  appId: import.meta.env.VITE_FIREBASE_APIKEY
+};
+```
+
+We will then pull this information from the .env file for each variable accordingly, but it's important that the spelling and capitals are this way exactly.
+
+### .env
+For authentication you will also need a .env file in your projects main folder, which is just an 'environement variable'. These are used to store seccret keys, which are essentially just passwords for the internet - we have used them before when integrating API keys for our AI chatbot project. API keys are essentially passwords.
+
+NEVER COMMIT YOUR .ENV FILE TO GITHUB. To make sure this doesn't happen, you have to go into .gitignore and add .env to the list of files to ignore.
