@@ -180,6 +180,13 @@ Syntax: !
 #### Falsy values
 There are some values such as 0, or empty strings such as ' ' which tend to show up as false in JavaScript. so !0, would actually return true in the log. It's not too big of a deal, but just be mindful when programming that you don't unintentionally get the wrong value.
 
+#### Forced Boolean
+Sometimes there will be logic that returns a value such as 0, rather than true or false. We can force it to be a boolean variable simply by putting !! before the code. For example:
+```
+const isData = globalData && !!Object.keys(globalData || {}).length
+```
+This is checking that globalData exists, and that its length is greater than 0. Without the exclamation marks, the value of isData would be 0, rather than false. It essentially converts anything that could be truthy or falsy to a boolean value.
+
 ## Conditional Logic
 
 ### Conditional statements
@@ -2069,4 +2076,12 @@ We can use the .env files to store information we need to access within our envi
 const OPENAI_SECRET_KEY = process.env.OPENAI_SECRET_KEY
 ```
 
-### Solving Algorithmic Programming Questions with JavaScript
+## Useful User Experience Functions
+### Pressing "Enter" on an input field
+Whenever you have an input field where there is a click button to submit or do some action, you should always incorporate pressing the enter key to do the same action - this is a very nice feature to have for any website or app. It makes user experience much smoother. To do so, include the code below as an attribute on your input field:
+```
+onKeyDown={(e)=> {if (e.key ==="Enter"){handleAuthenticate}}}
+```
+
+### Autofocus
+When you have any input field pop up thats prompting the user to fill in any information. Always throw the 'autoFocus' attribute into the input tag to make sure that the user doesn't have to click the field to start typing. By opening up the form/pop up/modal they have already indicated that they want to type, so you shouldn't make them click on the first input field.

@@ -426,15 +426,27 @@ Then you need to copy the Firebase code and put it into your firebase.js file. I
 ```
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
-  authDomain: import.meta.env.VITE_FIREBASE_APIKEY,
-  projectId: import.meta.env.VITE_FIREBASE_APIKEY,
-  storageBucket: import.meta.env.VITE_FIREBASE_APIKEY,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_APIKEY,
-  appId: import.meta.env.VITE_FIREBASE_APIKEY
+  authDomain: import.meta.env.VITE_FIREBASE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECTID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_FIREBASE_APPID
 };
 ```
 
 We will then pull this information from the .env file for each variable accordingly, but it's important that the spelling and capitals are this way exactly.
+
+Since we need the database and authentication services from the firebase app, we need to add some more code to our file. We need to import Authentication and Firestore from the firebase app. Import these at the top of your firebase.js file:
+```
+import {getAuth} from 'firebase/auth'
+import {getFirestore}from 'firebase/firestore'
+```
+
+After this, we need to export auth and database using some const so that they can be used anywhere within our project. Code as shown below:
+```
+export const auth = getAuth(app)
+export const db = getFirestore(app)
+```
 
 ### .env
 For authentication you will also need a .env file in your projects main folder, which is just an 'environement variable'. These are used to store seccret keys, which are essentially just passwords for the internet - we have used them before when integrating API keys for our AI chatbot project. API keys are essentially passwords.
