@@ -448,6 +448,8 @@ export const auth = getAuth(app)
 export const db = getFirestore(app)
 ```
 
+Then we need to configure firebase from the console.
+
 ### .env
 For authentication you will also need a .env file in your projects main folder, which is just an 'environement variable'. These are used to store seccret keys, which are essentially just passwords for the internet - we have used them before when integrating API keys for our AI chatbot project. API keys are essentially passwords.
 
