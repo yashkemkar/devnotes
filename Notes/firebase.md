@@ -10,7 +10,7 @@ In react, context is another react hook. We normally use alot of props and send 
 
 1. Within the root directory of the application, we need to create a firebase.js file.
 
-2. Within the src folder, we need to create a folder named 'context', and then within this, we need to create a jsx file  named 'AuthContext.jsx'.
+2. Within the main (or src if we are using react) folder, we need to create a folder named 'context', and then within this, we need to create a jsx file  named 'AuthContext.jsx'.
 
 3. Create a new project in Firebase.
 
@@ -18,14 +18,27 @@ In react, context is another react hook. We normally use alot of props and send 
 
 5. Create a .env file to store the secret keys.
 
-6. Copy the SDK code from firebase and put it in your firebase.js file and copy over the information to your .env also (so the keys are there).
+6. Copy the SDK code from firebase and put it in your firebase.js file and copy over the information not (not including "" marks) to your .env also (so the keys are there).
 
 7. Change keys in your firebase.js folder to the capitalised version such as:
 apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
 
-8. Import Authentication and Firestore (database) services into the firebase.js file.
+or it could be
+
+apiKey: process.env.NEXT_PUBLIC_API_KEY,
+
+8. Import Authentication and Firestore (database) services into the firebase.js file. And then you have to parse in the app into those functions.
+
+```
+import {getAuth} from "firebase/auth"
+import {getFirestore} from "firebase/firestore"
+```
 
 9. Export a constant variable called auth and db to export your authentication service and database service.
+```
+export const auth = getAuth(app)
+export const db = getFirestore(app)
+```
 
 10. Then you need to set the same services up in the firebase console online.
 
@@ -42,12 +55,63 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-    	allow read, write: if false;
-    }    
-    match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
-  	}
+    match /users/{userId}/{document=**} {
+      allow read, write: if (request.auth != null && request.auth.uid == userId);
+    }
   }
 }
 ```
+
+## Authentication Handlers  
+within your AuthContext.jsx file you will need to set up some standard authentication handler functions such as sign up, sign in, log out, etc. You will also need to utilise the useEffect react hook for an on-mount check for the state. See the code below:
+```
+
+// Wrapper function to wrap our entire application (either in Authorised state or Not Authorised state). Children get parsed in as props - where the children will be the whole app - so AuthContext can be accessed globally.
+export function AuthProvider({ children }) {
+    const [currentUser, setCurrentUser] = useState(null)
+    const [userDataObj, setUserDataObj] = useState({})
+    const [loading, setLoading] = useState(true)
+
+    // Auth Handlers
+    function signup(email, password) {
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+
+    function login(email, password) {
+        return signInWithEmailAndPassword(auth, email, password)
+    }
+
+    function logout() {
+        setUserDataObj({})
+        setCurrentUser(null)
+        return signOut(auth)
+    }
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async user => {
+            try {
+                // Set the user to our local context state
+                setLoading(true)
+                setCurrentUser(user)
+                if (!user) {return}
+                console.log('Fetching user data!')
+                // if user exists, fetch data from firestore db
+                const docRef= doc(db, 'users',user.uid)
+                const docSnap = await getDoc(docRef)
+                let firebaseData = {}
+                // fetch document only if it exists
+                if(docSnap.exists()) {
+                    console.log('Found user data!')
+                    firebaseData=docSnap.data()
+                    console.log('firebaseData')
+                }
+                setUserDataObj(firebaseData)
+            } catch (err) {
+                console.log(err.message)
+            } finally {
+                setLoading(false)
+            }
+        })
+        return unsubscribe
+    }, [])
+    ```
